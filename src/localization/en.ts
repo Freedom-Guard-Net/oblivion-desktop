@@ -9,7 +9,9 @@ const english: Language = {
         disconnecting: 'Disconnecting ...',
         disconnected: 'Disconnected',
         ip_check: 'Checking Ip ...',
-        keep_trying: 'Please wait a moment to try again...'
+        keep_trying: 'Please wait a moment to try again...',
+        preparing_rulesets: 'Preparing rulesets...',
+        downloading_rulesets_failed: 'Downloading rulesets failed.'
     },
     home: {
         title_warp_based: 'Warp Based',
@@ -23,7 +25,8 @@ const english: Language = {
         drawer_update_label: 'New Update',
         drawer_speed_test: 'Speed Test',
         drawer_about: 'About App',
-        drawer_lang: 'Language Change'
+        drawer_lang: 'Language Change',
+        drawer_singbox: 'Tunnel Settings'
     },
     toast: {
         ip_check_please_wait: 'Please wait a few seconds to retry the check!',
@@ -34,7 +37,14 @@ const english: Language = {
         cleared: 'The log has been cleared!',
         please_wait: 'Please Wait ...',
         offline: 'You Are Offline!',
-        settings_changed: 'Applying settings requires reconnecting.'
+        settings_changed: 'Applying settings requires reconnecting.',
+        hardware_usage: 'Enabling this option will increase hardware resource usage.',
+        config_added:
+            'The configuration has been successfully added, and to use it, you must click on the connection.',
+        profile_added: 'The endpoint has been successfully added to the profile.',
+        endpoint_added: 'The endpoint was successfully replaced.',
+        new_update:
+            'A new version of the app is available. Would you like to download and prepare it for installation?'
     },
     settings: {
         title: 'Warp Settings',
@@ -46,7 +56,7 @@ const english: Language = {
         method_psiphon: 'Psiphon',
         method_psiphon_desc: 'Enable Psiphon',
         method_psiphon_location: 'Country',
-        method_psiphon_location_auto: 'Automatic',
+        method_psiphon_location_auto: 'Random',
         method_psiphon_location_desc: 'Select the desired country IP',
         endpoint: 'Endpoint',
         endpoint_desc: 'Combination of IP or domain name, along with port',
@@ -58,7 +68,7 @@ const english: Language = {
         proxy_mode_desc: 'Defining Proxy Settings',
         port: 'Proxy Port',
         port_desc: 'Define application proxy port',
-        share_vpn: 'Share (LAN)',
+        share_vpn: 'Bind Address',
         share_vpn_desc: 'Share a proxy on the network',
         dns: 'DNS',
         dns_desc: 'Block ads & adult content',
@@ -81,6 +91,8 @@ const english: Language = {
         force_close_desc: 'Do not stay in the system tray upon exit',
         shortcut: 'Navigator',
         shortcut_desc: 'Shortcuts on the home page',
+        sound_effect: 'Sound effect',
+        sound_effect_desc: 'Plays sound on successful connection',
         restore: 'Restore',
         restore_desc: 'Apply default application settings',
         scanner: 'Scanner Settings',
@@ -98,14 +110,42 @@ const english: Language = {
         routing_rules_disabled: 'Disabled',
         routing_rules_items: 'Items',
         profile: 'Profile',
-        profile_desc: 'Endpoints saved by you'
+        profile_desc: 'Endpoints saved by you',
+        singbox: 'Singbox Settings',
+        close_singbox: 'Stop operation',
+        close_singbox_desc: 'Automatically close sing-box on disconnect',
+        close_helper: 'Stop helper',
+        close_helper_desc: 'Automatically close helper on exit',
+        mtu: 'MTU Value',
+        mtu_desc: 'Set the Maximum Transmission Unit',
+        geo_block: 'Blocking',
+        geo_block_desc: 'Ads, Malware, Phishing & Crypto Miners',
+        geo_rules_ip: 'IP Routing',
+        geo_rules_ip_desc: 'Applying GeoIP rules',
+        geo_rules_site: 'Web Routing',
+        geo_rules_site_desc: 'Applying GeoSite rules',
+        geo_nsfw_block: 'Content Filter',
+        geo_nsfw_block_desc: 'Block NSFW websites',
+        more_helper: 'Assistant Settings',
+        singbox_log: 'Logging',
+        singbox_log_desc: 'Set Log Level',
+        singbox_stack: 'Stack',
+        singbox_stack_desc: 'Set Stack Type',
+        singbox_sniff: 'Sniff',
+        singbox_sniff_desc: 'Enable Sniffing & Override Destination',
+        singbox_addressing: 'Addressing',
+        singbox_addressing_desc: 'Set Interface Address Type',
+        more_duties: 'Duties',
+        beta_release: 'Beta Update',
+        beta_release_desc: 'Stay informed about pre-release versions'
     },
     tabs: {
         home: 'Connect',
         warp: 'Warp',
         network: 'Network',
         scanner: 'Scanner',
-        app: 'App'
+        app: 'App',
+        singbox: 'Singbox'
     },
     modal: {
         endpoint_title: 'Endpoint',
@@ -113,11 +153,18 @@ const english: Language = {
         license_desc:
             'The program does not necessarily need a Warp license to run, but if you wish, you can enter your license here.',
         license_clear: 'Clear',
+        test_url_title: 'Test Url',
+        test_url_desc: 'Connectivity test address',
+        test_url_update: 'Receive suggestions',
         port_title: 'Proxy Port',
         restore_title: 'Restore Changes',
         restore_desc:
             'By confirming the operation of restoring the changes, all program settings will return to the default state and your connection will be disconnected.',
         routing_rules_sample: 'Sample',
+        routing_rules_alert_tun:
+            'Only the routing rules for domain, ip & app will affect the Tun configuration.',
+        routing_rules_alert_system:
+            'Except for the app routing rule, other rules will affect the System Proxy configuration.',
         endpoint_default: 'Default',
         endpoint_suggested: 'Suggested',
         endpoint_latest: 'Latest',
@@ -127,6 +174,9 @@ const english: Language = {
         profile_name: 'Title',
         profile_endpoint: 'Endpoint',
         profile_limitation: (value) => `You can add a maximum of ${value} endpoints.`,
+        mtu_title: 'MTU Value',
+        mtu_desc:
+            'Maximum Transmission Unit (MTU) refers to the maximum size of data packets, which should be set between 1000 and 9999.',
         confirm: 'I confirm',
         update: 'Update',
         cancel: 'Cancel'
@@ -144,6 +194,7 @@ const english: Language = {
         error_port_already_in_use: (value) =>
             `Port ${value} is being used by another program; Change it.`,
         error_port_socket: 'Use another port.',
+        error_port_restart: 'The port is in use; restarting ...',
         error_unknown_flag: 'An invalid command was executed in the background.',
         error_deadline_exceeded: 'Connection timed out; Try again.',
         error_configuration_encountered: 'Proxy configuration encountered an error!',
@@ -152,9 +203,17 @@ const english: Language = {
             'Proxy configuration is not supported in your operating system, but you can use Warp Proxy manually.',
         error_configuring_proxy: (value) => `Error configuring proxy for ${value}!`,
         error_wp_not_found: 'The warp-plus file is not located alongside the application package!',
+        error_wp_exclusions:
+            'The warp-plus file has likely been quarantined due to a false positive alert and incorrect detection by the antivirus, causing issues with the program’s ability to access the internet freely.\nThe program can add the mentioned file to the exclusions list in certain antiviruses if access permission is granted. Should this be done?',
         error_wp_stopped: 'The warp-plus file has encountered an issue running!',
         error_connection_failed: 'Connection to 1.1.1.1 was not possible.',
-        error_country_failed: 'Cannot connect to the selected country.'
+        error_country_failed: 'Cannot connect to the selected country.',
+        error_singbox_failed_stop: 'Failed to stop Sing-Box!',
+        error_singbox_failed_start: 'Failed to start Sing-Box!',
+        error_wp_reset_peer: 'The connection to Cloudflare was unexpectedly interrupted!',
+        error_failed_connection: 'Failed to establish connection!',
+        error_canceled_by_user: 'The operation was canceled by the user.',
+        error_helper_not_found: 'The helper file is not located alongside the application package!'
     },
     about: {
         title: 'About App',
@@ -173,7 +232,7 @@ const english: Language = {
         settings_app: 'Application',
         about: 'About',
         log: 'Log',
-        speed_test: 'Speed test',
+        speed_test: 'Speed Test',
         exit: 'Exit'
     },
     update: {

@@ -61,14 +61,14 @@ technology
             <td>
                 :white_check_mark: Proxy <small>(No Change)</small><br>
                 :white_check_mark: System Proxy <small>(with PAC)</small><br>
-                :white_large_square: TUN
+                :white_check_mark: TUN <small>(with SingBox)</small>
             </td>
         </tr>
         <tr>
             <td>Routing Rules</td>
             <td>
                 :white_check_mark: System Proxy<br>
-                :white_large_square: GeoIP
+                :white_check_mark: GeoDB
             </td>
         </tr>
         <tr>
@@ -86,12 +86,15 @@ technology
                 :white_check_mark:  English <br>
                 :white_check_mark:  Chinese <br>
                 :white_check_mark:  Russian <br>
-                :white_check_mark:  Deutsch <br>
                 :white_check_mark:  Turkish <br>
                 :white_check_mark:  Indonesian <br>
                 :white_check_mark:  Arabic <br>
-                :white_check_mark:  Portuguese (Brazil) <br>
-                :white_check_mark:  Vietnamese
+                :white_check_mark:  Portuguese <br>
+                :white_check_mark:  Vietnamese <br>
+                :white_check_mark:  Urdu <br>
+                :white_check_mark:  Spanish <br>
+                :white_check_mark:  Burmese <br>
+                :white_check_mark:  Amharic
             </td>
         </tr>
         <tr>
@@ -110,8 +113,9 @@ technology
                 :white_check_mark: Scanner<br>
                 :white_check_mark: Ping<br>
                 :white_check_mark: Accessibility<br>
-                :white_large_square: Inline Update<br>
-                :white_large_square: SpeedTest
+                :white_check_mark: SpeedTest<br>
+                :white_check_mark: In-App Update <small>(Win)</small><br>
+                :white_large_square: Kill Switch
             </td>
         </tr>
     </tbody>
@@ -121,78 +125,75 @@ technology
 ## Download
 
 <div align=left>
-<table>
-    <thead align=left>
-        <tr>
-            <th>OS</th>
-            <th>Download</th>
-            <th>Compatibility</th>
-        </tr>
-    </thead>
-    <tbody align=left>
-        <tr>
-            <td>Windows</td>
-            <td>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Setup-x64-0C88D8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Setup-arm64-0C88D8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Setup-x86-0C88D8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Portable-x64-005AA8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Portable-arm64-005AA8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Portable-x86-005AA8.svg?logo=windows"></a><br>
-            </td>
-            <td>
-                v10<br>
-                v11
-            </td>
-        </tr>
-        <tr>
-            <td>macOS</td>
-            <td>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/DMG-arm64-F0F0F1.svg?logo=apple"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/DMG-x64-5D5D5D.svg?logo=apple"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/ZIP-arm64-F0F0F1.svg?logo=apple" /></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/ZIP-x64-5D5D5D.svg?logo=apple" /></a>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Linux</td>
-            <td>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/DEB-x64-DC470E.svg?logo=debian"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/DEB-arm64-DC470E.svg?logo=debian"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/RPM-x64-01ABD2.svg?logo=redhat"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/RPM-arm64-01ABD2.svg?logo=redhat"></a><br>    
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/tar.xz-x64-EDC204.svg?logo=linux"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/tar.xz-arm64-EDC204.svg?logo=linux"></a><br>             
-            </td>
-            <td>
-                Gnome<br>
-                KDE
-            </td>
-        </tr>
-        <td>Android</td>
-            <td>
-                <a href="https://github.com/bepass-org/oblivion/releases/latest"><img src="https://img.shields.io/badge/APK-Universal-044d29.svg?logo=android"></a><br>
-                <a href="https://play.google.com/store/apps/details?id=org.bepass.oblivion"><img src="https://img.shields.io/badge/APK-Universal-044d29.svg?logo=googleplay"></a>
-            </td>
-            <td>v6+</td>
-        </tr>
-        <tr>
-            <td>iOS</td>
-            <td>
-                <small>Coming Soon ...</small>
-            </td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+    <table>
+        <thead align="left">
+            <tr>
+                <th>OS / Arch</th>
+                <th>Compatibility</th>
+            </tr>
+        </thead>
+        <tbody align="left">
+            <tr>
+                <td>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-x64.exe"><img src="https://img.shields.io/badge/Windows-Setup x64-0C88D8.svg?logo=gitforwindows"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-x64.zip"><img src="https://img.shields.io/badge/Windows-Portable x64-005AA8.svg?logo=gitforwindows"></a>
+                    <br>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-arm64.exe"><img src="https://img.shields.io/badge/Windows-Setup arm64-0C88D8.svg?logo=gitforwindows"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-arm64.zip"><img src="https://img.shields.io/badge/Windows-Portable arm64-005AA8.svg?logo=gitforwindows"></a>
+                    <br>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-ia32.exe"><img src="https://img.shields.io/badge/Windows-Setup x86-0C88D8.svg?logo=gitforwindows"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-ia32.zip"><img src="https://img.shields.io/badge/Windows-Portable x86-005AA8.svg?logo=gitforwindows"></a>
+                </td>
+                <td>
+                    10+<br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-mac-arm64.dmg"><img src="https://img.shields.io/badge/macOS-DMG arm64-F0F0F1.svg?logo=apple"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-mac-arm64.zip"><img src="https://img.shields.io/badge/macOS-ZIP arm64-9e9e9e.svg?logo=apple" /></a><br>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-mac-x64.dmg"><img src="https://img.shields.io/badge/macOS-DMG x64-F0F0F1.svg?logo=apple"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-mac-x64.zip"><img src="https://img.shields.io/badge/macOS-ZIP x64-9e9e9e.svg?logo=apple" /></a>
+                </td>
+                <td>10.15+</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-amd64.deb"><img src="https://img.shields.io/badge/Linux-DEB x64-DC470E.svg?logo=debian"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-x86_64.rpm"><img src="https://img.shields.io/badge/Linux-RPM x64-01ABD2.svg?logo=redhat"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-x64.tar.xz"><img src="https://img.shields.io/badge/Linux-tar.xz x64-EDC204.svg?logo=linux"></a>
+                    <br>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-arm64.deb"><img src="https://img.shields.io/badge/Linux-DEB arm64-DC470E.svg?logo=debian"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-aarch64.rpm"><img src="https://img.shields.io/badge/Linux-RPM arm64-01ABD2.svg?logo=redhat"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-arm64.tar.xz"><img src="https://img.shields.io/badge/Linux-tar.xz arm64-EDC204.svg?logo=linux"></a>         
+                </td>
+                <td>
+                    Gnome<br>
+                    KDE
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://github.com/bepass-org/oblivion/releases/latest"><img src="https://img.shields.io/badge/Android-APK Universal-0d7365.svg?logo=android"></a>
+                    <a href="https://play.google.com/store/apps/details?id=org.bepass.oblivion"><img src="https://img.shields.io/badge/Android-APK Universal-044d29.svg?logo=googleplay"></a>
+                </td>
+                <td>6+</td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="https://img.shields.io/badge/iOS-Coming soon ...-pink.svg?logo=apple">
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 ## Faced Bug 🐞?
 
 checkout [wiki](https://github.com/bepass-org/oblivion-desktop/wiki) and search
 in [issues](https://github.com/bepass-org/oblivion-desktop/issues) (open
-and [closed](https://github.com/bepass-org/oblivion-desktop/issues?q=is%3Aissue+is%3Aclosed) ones!) and if you did'nt
+and [closed](https://github.com/bepass-org/oblivion-desktop/issues?q=is%3Aissue+is%3Aclosed) ones!) and if you didn't
 get your answer, then [create a new issue](https://github.com/bepass-org/oblivion-desktop/issues/new/choose).
 
 ## Get Involved
@@ -221,14 +222,15 @@ provided by the following friends:
 - [Cloudflare Warp](https://www.cloudflare.com/application/terms/)
 - [warp-plus](https://github.com/bepass-org/warp-plus/) (Yousef Ghobadi & Mark Pashmfouroush)
 - [Oblivion](https://github.com/bepass-org/oblivion)
+- [Oblivion Helper](https://github.com/ShadowZagrosDev/oblivion-helper) (GPLv3)
 - [Electron](https://www.electronjs.org/)
 - [React](https://github.com/facebook/react)
 - [electron-react-boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
 - [electron-builder](https://github.com/electron-userland/electron-builder)
 - [regedit](https://www.npmjs.com/package/regedit)
-- [sing-box](https://github.com/SagerNet/sing-box)
 - [Iran Sing-box rules](https://github.com/Chocolate4U/Iran-sing-box-rules)
 - [Shabnam Font](https://rastikerdar.github.io/shabnam-font/) (Saber Rastikerdar)
+- [Zag-NetStats](https://github.com/ShadowZagrosDev/Zag-NetStats)
 - [and others 🧡](package.json)
 
 ## Contributors

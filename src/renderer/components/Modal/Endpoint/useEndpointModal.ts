@@ -54,22 +54,21 @@ const useEndpointModal = (props: EndpointModalProps) => {
         };
     };
 
+    const defEndpoint = {
+        ipv4: [
+            '162.159.192.175:891',
+            '162.159.192.36:908',
+            '162.159.195.55:908',
+            '188.114.97.159:942',
+            '188.114.97.47:4233'
+        ],
+        ipv6: [
+            '[2606:4700:d1::27d0:ac63:30e2:5dfb]:864',
+            '[2606:4700:d1:0:4241:c24c:54ad:7920]:903',
+            '[2606:4700:d0:0:799c:392:47ed:bf4e]:955'
+        ]
+    };
     const initSuggestion = useMemo(() => {
-        const defEndpoint = {
-            ipv4: [
-                //'188.114.98.224:2408',
-                '162.159.192.175:891',
-                '162.159.192.36:908',
-                '162.159.195.55:908',
-                '188.114.97.159:942',
-                '188.114.97.47:4233'
-            ],
-            ipv6: [
-                '[2606:4700:d1::27d0:ac63:30e2:5dfb]:864',
-                '[2606:4700:d1:0:4241:c24c:54ad:7920]:903',
-                '[2606:4700:d0:0:799c:392:47ed:bf4e]:955'
-            ]
-        };
         const storedSuggestion = localStorage?.getItem('OBLIVION_SUGGESTION');
         let data = storedSuggestion ? JSON.parse(storedSuggestion) : defEndpoint;
         data = removeDuplicates(data);
@@ -78,7 +77,7 @@ const useEndpointModal = (props: EndpointModalProps) => {
 
     const [suggestion, setSuggestion] = useState<Suggestion>(initSuggestion);
 
-    const fetchEndpoints = async () => {
+    const fetchEndpoints = async (openInEnd: boolean = true) => {
         loadingToast(appLang?.toast?.please_wait);
         try {
             const response = await fetch(
@@ -89,20 +88,19 @@ const useEndpointModal = (props: EndpointModalProps) => {
                 if (data?.ipv4 && data?.ipv6) {
                     data = removeDuplicates(data);
                     setSuggestion(data);
-                    setTimeout(() => {
-                        setShowSuggestion(true);
-                    }, 1000);
                     localStorage.setItem('OBLIVION_SUGGESTION', JSON.stringify(data));
                 }
-                stopLoadingToast();
-                updaterRef.current?.classList.add('hidden');
             } else {
                 console.error('Failed to fetch Endpoints:', response.statusText);
-                updaterRef.current?.classList.add('hidden');
-                stopLoadingToast();
             }
         } catch (error) {
-            console.error('Failed to fetch Endpoints:', error);
+            console.log('Failed to fetch Endpoints:', error);
+        } finally {
+            if (openInEnd) {
+                setTimeout(() => {
+                    setShowSuggestion(true);
+                }, 1000);
+            }
             updaterRef.current?.classList.add('hidden');
             stopLoadingToast();
         }
@@ -112,8 +110,6 @@ const useEndpointModal = (props: EndpointModalProps) => {
         settings.get('scanResult').then((value) => {
             setScanResult(typeof value === 'undefined' ? defaultSettings.scanResult : value);
         });
-
-        //fetchEndpoints();
 
         const handleClickOutside = (event: MouseEvent) => {
             if (suggestionRef.current && !suggestionRef.current.contains(event.target as Node)) {
@@ -126,7 +122,14 @@ const useEndpointModal = (props: EndpointModalProps) => {
         };
     }, []);
 
-    useEffect(() => setShowModal(isOpen), [isOpen]);
+    useEffect(() => {
+        setShowModal(isOpen);
+
+        if (!isOpen) return;
+        if (suggestion?.ipv4?.length === defEndpoint.ipv4?.length) {
+            fetchEndpoints(false);
+        }
+    }, [isOpen]);
 
     const handleOnClose = useCallback(() => {
         setShowModal(false);

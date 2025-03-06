@@ -1,3 +1,4 @@
+//import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import 'react-modern-drawer/dist/index.css';
 import useLanding from './useLanding';
@@ -5,6 +6,8 @@ import LandingDrawer from './LandingDrawer';
 import LandingHeader from './LandingHeader';
 import LandingBody from './LandingBody';
 import Tabs from '../../components/Tabs';
+import ConfigHandler from '../../components/ConfigHandler';
+import DownloadProgressBar from './DownloadProgressBar';
 
 export default function Landing() {
     const {
@@ -29,16 +32,22 @@ export default function Landing() {
         proxyStatus,
         appVersion,
         shortcut,
-        speeds,
-        dataUsage
+        netStats,
+        dataUsage,
+        betaRelease,
+        downloadProgress
     } = useLanding();
 
     return (
         <>
+            <ConfigHandler isConnected={isConnected} isLoading={isLoading} appLang={appLang} />
             <LandingHeader
                 handleMenuOnKeyDown={handleMenuOnKeyDown}
                 hasNewUpdate={hasNewUpdate}
                 toggleDrawer={toggleDrawer}
+                isConnected={isConnected}
+                isLoading={isLoading}
+                appLang={appLang}
             />
             <LandingDrawer
                 appLang={appLang}
@@ -47,6 +56,8 @@ export default function Landing() {
                 toggleDrawer={toggleDrawer}
                 hasNewUpdate={hasNewUpdate}
                 appVersion={appVersion}
+                proxyMode={proxyMode}
+                betaRelease={betaRelease}
             />
             <LandingBody
                 appLang={appLang}
@@ -64,15 +75,18 @@ export default function Landing() {
                 statusText={statusText}
                 proxyStatus={proxyStatus}
                 appVersion={appVersion}
-                speeds={speeds}
+                netStats={netStats}
                 dataUsage={dataUsage}
             />
-            {(!isConnected || (isConnected && !ipData)) && shortcut && <Tabs active='landing' />}
+            {(!isConnected || proxyMode === 'none' || (isConnected && !ipData)) && shortcut && (
+                <Tabs active='landing' proxyMode={proxyMode} />
+            )}
             <Toaster
                 position='bottom-center'
                 reverseOrder={false}
                 containerStyle={{ bottom: shortcut ? '70px' : '16px' }}
             />
+            <DownloadProgressBar data={downloadProgress} />
         </>
     );
 }

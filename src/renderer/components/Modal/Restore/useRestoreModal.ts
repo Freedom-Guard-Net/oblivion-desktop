@@ -1,9 +1,19 @@
 import { KeyboardEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import { defaultSettings, dnsServers } from '../../../../defaultSettings';
+import {
+    defaultSettings,
+    dnsServers,
+    singBoxGeoIp,
+    singBoxGeoSite,
+    singBoxLog,
+    singBoxStack,
+    singBoxAddrType
+} from '../../../../defaultSettings';
 import { settings } from '../../../lib/settings';
 import { ipcRenderer } from '../../../lib/utils';
 import { changeLang, getDirectionByLang, LanguageType } from '../../../../localization';
 import useTranslate from '../../../../localization/useTranslate';
+import { useNavigate } from 'react-router-dom';
+import { loadingToast, stopLoadingToast } from '../../../lib/toasts';
 
 interface RestoreModalProps {
     isOpen: boolean;
@@ -33,6 +43,7 @@ const useRestoreModal = (props: RestoreModalProps) => {
     );
 
     const [showModal, setShowModal] = useState<boolean>(isOpen);
+    const navigate = useNavigate();
 
     useEffect(() => setShowModal(isOpen), [isOpen]);
 
@@ -54,9 +65,10 @@ const useRestoreModal = (props: RestoreModalProps) => {
     );
 
     const onSaveModal = useCallback(async () => {
+        loadingToast(appLang?.toast?.please_wait);
         // in this page
         setForceClose(defaultSettings.forceClose);
-        setShortcut(defaultSettings.shortcut);
+        //setShortcut(defaultSettings.shortcut);
         setLang(defaultSettings.lang);
         setOpenAtLogin(defaultSettings.openAtLogin);
         setAutoConnect(defaultSettings.autoConnect);
@@ -68,7 +80,7 @@ const useRestoreModal = (props: RestoreModalProps) => {
             detectingSystemTheme ? 'dark' : 'light'
         );
         await settings.set('forceClose', defaultSettings.forceClose);
-        await settings.set('shortcut', defaultSettings.shortcut);
+        //await settings.set('shortcut', defaultSettings.shortcut);
         await settings.set('lang', defaultSettings.lang);
         changeLang(defaultSettings.lang);
         document.documentElement.setAttribute('lang', defaultSettings.lang);
@@ -93,7 +105,7 @@ const useRestoreModal = (props: RestoreModalProps) => {
         await settings.set('ipData', defaultSettings.ipData);
         await settings.set('port', defaultSettings.port);
         await settings.set('proxyMode', defaultSettings.proxyMode);
-        await settings.set('shareVPN', defaultSettings.shareVPN);
+        //await settings.set('shareVPN', defaultSettings.shareVPN);
         await settings.set('routingRules', defaultSettings.routingRules);
         await settings.set('reserved', defaultSettings.reserved);
         await settings.set('scanResult', defaultSettings.scanResult);
@@ -101,10 +113,29 @@ const useRestoreModal = (props: RestoreModalProps) => {
         await settings.set('dns', dnsServers[0].value);
         await settings.set('dataUsage', defaultSettings.dataUsage);
         await settings.set('asn', defaultSettings.asn);
+        await settings.set('closeHelper', defaultSettings.closeHelper);
+        await settings.set('singBoxMTU', defaultSettings.singBoxMTU);
+        await settings.set('singBoxGeoIp', singBoxGeoIp[0].geoIp);
+        await settings.set('singBoxGeoSite', singBoxGeoSite[0].geoSite);
+        await settings.set('singBoxGeoBlock', defaultSettings.singBoxGeoBlock);
+        await settings.set('singBoxGeoNSFW', defaultSettings.singBoxGeoNSFW);
+        await settings.set('singBoxLog', singBoxLog[0].value);
+        await settings.set('singBoxStack', singBoxStack[0].value);
+        await settings.set('singBoxSniff', defaultSettings.singBoxSniff);
+        await settings.set('singBoxAddrType', singBoxAddrType[0].value);
+        await settings.set('restartCounter', defaultSettings.restartCounter);
+        await settings.set('testUrl', defaultSettings.testUrl);
+        await settings.set('soundEffect', defaultSettings.soundEffect);
+        await settings.set('betaRelease', defaultSettings.betaRelease);
         //
         ipcRenderer.sendMessage('wp-end');
         ipcRenderer.sendMessage('localization', defaultSettings.lang);
         ipcRenderer.sendMessage('startup', defaultSettings.openAtLogin);
+        //
+        setTimeout(function () {
+            stopLoadingToast();
+            navigate('/');
+        }, 1500);
     }, [
         setForceClose,
         setShortcut,

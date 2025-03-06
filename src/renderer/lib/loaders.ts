@@ -1,5 +1,12 @@
 import { getDirectionByLang } from '../../localization';
+import { defaultSettings } from '../../defaultSettings';
 import { settings } from './settings';
+
+export const clearUpdateNotifOnStartup = () => {
+    if (typeof window === 'undefined') return;
+    localStorage?.removeItem('OBLIVION_CHECKUPDATE');
+    localStorage?.removeItem('OBLIVION_NEWUPDATE');
+};
 
 export const loadTheme = () => {
     const detectingSystemTheme = window?.matchMedia('(prefers-color-scheme: dark)')?.matches;
@@ -11,15 +18,14 @@ export const loadTheme = () => {
     });
 };
 
-const date = new Date();
-const getTimeZone = date?.toString().toLowerCase();
-
 export const loadLang = () => {
     settings.get('lang').then((data) => {
-        if (!localStorage.getItem('lang')) {
-            localStorage.setItem('lang', getTimeZone?.includes('iran') ? 'fa' : 'en');
+        if (typeof data === 'undefined') {
+            data = defaultSettings.lang;
         }
-
+        if (!localStorage.getItem('lang')) {
+            localStorage.setItem('lang', data);
+        }
         const langDir = getDirectionByLang(data);
         document.documentElement.setAttribute('lang', data);
         document.documentElement.setAttribute('dir', langDir);

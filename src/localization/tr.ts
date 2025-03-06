@@ -9,7 +9,9 @@ const turkish: Language = {
         disconnecting: 'Bağlantı kesiliyor ...',
         disconnected: 'Bağlantı kesildi',
         ip_check: 'IP kontrol ediliyor ...',
-        keep_trying: 'Tekrar denemek için lütfen bir süre bekleyin...'
+        keep_trying: 'Tekrar denemek için lütfen bir süre bekleyin...',
+        preparing_rulesets: 'Kurallar seti hazırlanıyor...',
+        downloading_rulesets_failed: 'Kurallar seti indirilemedi.'
     },
     home: {
         title_warp_based: 'Warp Tabanlı',
@@ -23,7 +25,8 @@ const turkish: Language = {
         drawer_update_label: 'Yeni Güncelleme',
         drawer_speed_test: 'Hız Testi',
         drawer_about: 'Uygulama Hakkında',
-        drawer_lang: 'Dil Değişikliği'
+        drawer_lang: 'Dil Değişikliği',
+        drawer_singbox: 'Tünel Ayarlar'
     },
     toast: {
         ip_check_please_wait: 'Lütfen kontrolü yeniden denemek için birkaç saniye bekleyin!',
@@ -34,7 +37,15 @@ const turkish: Language = {
         cleared: 'Günlük temizlendi!',
         please_wait: 'Lütfen Bekleyin ...',
         offline: 'Çevrimdışısınız!',
-        settings_changed: 'Ayarları uygulamak için yeniden bağlanma gerekiyor.'
+        settings_changed: 'Ayarları uygulamak için yeniden bağlanma gerekiyor.',
+        hardware_usage:
+            'Bu seçeneği etkinleştirmek donanım kaynaklarının kullanımını artıracaktır.',
+        config_added:
+            'Yapılandırma başarıyla eklendi ve kullanmak için bağlantıya tıklamanız gerekiyor.',
+        profile_added: 'Uç nokta başarıyla profile eklendi.',
+        endpoint_added: 'Uç nokta başarıyla değiştirildi.',
+        new_update:
+            'Uygulamanın yeni bir sürümü mevcut. İndirmek ve kuruluma hazırlamak ister misiniz?'
     },
     settings: {
         title: 'Warp Ayarları',
@@ -46,7 +57,7 @@ const turkish: Language = {
         method_psiphon: 'Psiphon',
         method_psiphon_desc: "Psiphon'u etkinleştir",
         method_psiphon_location: 'Ülke',
-        method_psiphon_location_auto: 'Otomatik',
+        method_psiphon_location_auto: 'rastgele',
         method_psiphon_location_desc: "İstenen ülke IP'sini seçin",
         endpoint: 'Endpoint',
         endpoint_desc: 'IP veya alan adı kombinasyonu, port ile birlikte',
@@ -58,7 +69,7 @@ const turkish: Language = {
         proxy_mode_desc: 'Proxy Ayarlarını Tanımla',
         port: 'Proxy Portu',
         port_desc: 'Uygulama proxy portunu tanımlayın',
-        share_vpn: 'Paylaş (LAN)',
+        share_vpn: 'Bağlama adresi',
         share_vpn_desc: 'Ağda proxy paylaşımı',
         dns: 'DNS',
         dns_desc: 'Reklamları ve yetişkin içeriklerini engelle',
@@ -81,6 +92,8 @@ const turkish: Language = {
         force_close_desc: 'Çıkışta sistem tepsisinde kalma',
         shortcut: 'Kısayol',
         shortcut_desc: 'Ana sayfadaki kısayollar',
+        sound_effect: 'ses efekti',
+        sound_effect_desc: 'başarılı bir bağlantıda ses çalar',
         restore: 'Geri Yükle',
         restore_desc: 'Varsayılan uygulama ayarlarını uygula',
         scanner: 'Tarayıcı Ayarları',
@@ -98,14 +111,42 @@ const turkish: Language = {
         routing_rules_disabled: 'Devre Dışı',
         routing_rules_items: 'Öğeler',
         profile: 'Profil',
-        profile_desc: "Tarafınızdan kaydedilen endpoint'ler"
+        profile_desc: "Tarafınızdan kaydedilen endpoint'ler",
+        singbox: 'Singbox Ayarları',
+        close_singbox: 'İşlemi durdur',
+        close_singbox_desc: "Bağlantı kesildiğinde sing-box'ı otomatik olarak kapat",
+        close_helper: 'Yardımcıyı durdur',
+        close_helper_desc: 'Çıkışta yardımcıyı otomatik olarak kapat',
+        mtu: 'MTU Değeri',
+        mtu_desc: 'Maksimum İletim Birimini Ayarla',
+        geo_block: 'Engelleme',
+        geo_block_desc: 'Reklamlar, kötü amaçlı yazılımlar, kimlik avı ve kripto madencileri',
+        geo_rules_ip: 'IP Yönlendirme',
+        geo_rules_ip_desc: 'GeoIP kurallarını uygulama',
+        geo_rules_site: 'Web Yönlendirme',
+        geo_rules_site_desc: 'GeoSite kurallarını uygulama',
+        geo_nsfw_block: 'İçerik Filtresi',
+        geo_nsfw_block_desc: 'NSFW sitelerini engelle',
+        more_helper: 'Yardımcı Ayarları',
+        singbox_log: 'Kayıt',
+        singbox_log_desc: 'Kayıt Seviyesi Ayarla',
+        singbox_stack: 'Yığın',
+        singbox_stack_desc: 'Yığın Tipini Ayarla',
+        singbox_sniff: 'Dinleme',
+        singbox_sniff_desc: 'Sniffing’i Etkinleştir ve Hedefi Geçersiz Kıl',
+        singbox_addressing: 'Adresleme',
+        singbox_addressing_desc: 'Arayüz Adres Türünü Ayarlayın',
+        more_duties: 'Daha fazla görev',
+        beta_release: 'Beta Güncellemesi',
+        beta_release_desc: 'Önizleme sürümleri hakkında bilgi sahibi olun'
     },
     tabs: {
         home: 'Bağlan',
         warp: 'Warp',
         network: 'Ağ',
         scanner: 'Tarayıcı',
-        app: 'Uygulama'
+        app: 'Uygulama',
+        singbox: 'Singbox'
     },
     modal: {
         endpoint_title: 'Endpoint',
@@ -113,11 +154,18 @@ const turkish: Language = {
         license_desc:
             'Program çalışması için Warp lisansı gerektirmez, ancak isterseniz lisansınızı buraya girebilirsiniz.',
         license_clear: 'Temizle',
+        test_url_title: 'Test URL',
+        test_url_desc: 'Bağlantı testi adresi',
+        test_url_update: 'Önerileri almak',
         port_title: 'Proxy Portu',
         restore_title: 'Değişiklikleri Geri Yükle',
         restore_desc:
             'Değişiklikleri geri yükleme işlemini onaylayarak, tüm program ayarları varsayılan duruma döner ve bağlantınız kesilir.',
         routing_rules_sample: 'Örnek',
+        routing_rules_alert_tun:
+            'Yalnızca etki alanı, ip ve uygulama için yönlendirme kuralları Tun yapılandırmasını etkileyecektir.',
+        routing_rules_alert_system:
+            'Uygulama yönlendirme kuralı dışında, diğer kurallar Sistem Proxy yapılandırmasını etkileyecektir.',
         endpoint_default: 'Varsayılan',
         endpoint_suggested: 'Önerilen',
         endpoint_latest: 'En Son',
@@ -127,6 +175,9 @@ const turkish: Language = {
         profile_name: 'Başlık',
         profile_endpoint: 'Endpoint',
         profile_limitation: (value) => `En fazla ${value} endpoint ekleyebilirsiniz.`,
+        mtu_title: 'MTU Değeri',
+        mtu_desc:
+            'Maksimum İletim Birimi (MTU), veri paketlerinin maksimum boyutunu ifade eder ve 1000 ile 9999 arasında ayarlanmalıdır.',
         confirm: 'Onaylıyorum',
         update: 'Güncelle',
         cancel: 'İptal'
@@ -145,6 +196,7 @@ const turkish: Language = {
         error_port_already_in_use: (value) =>
             `Port ${value} başka bir program tarafından kullanılıyor; Değiştirin.`,
         error_port_socket: 'Başka bir port kullanın.',
+        error_port_restart: 'Port kullanılıyor; yeniden başlatılıyor ...',
         error_unknown_flag: 'Arka planda geçersiz bir komut yürütüldü.',
         error_deadline_exceeded: 'Bağlantı zaman aşımına uğradı; Tekrar deneyin.',
         error_configuration_encountered: 'Proxy yapılandırması hatası ile karşılaşıldı!',
@@ -153,9 +205,17 @@ const turkish: Language = {
             'Proxy yapılandırması işletim sisteminizde desteklenmiyor, ancak manuel olarak Warp Proxy kullanabilirsiniz.',
         error_configuring_proxy: (value) => `${value} için proxy yapılandırılırken hata oluştu!`,
         error_wp_not_found: 'Warp-plus dosyası uygulama paketiyle birlikte yer almıyor!',
+        error_wp_exclusions:
+            'warp-plus dosyasının yanlış pozitif bildirim ve antivirüs tarafından yanlış tespit nedeniyle karantinaya alındığı ve programın internet erişimini serbest bir şekilde sağlamakta sorunlara yol açtığı muhtemeldir.\nProgram, erişim izni verilirse, bu dosyayı bazı antivirüslerde hariç tutma listesine ekleyebilir. Bunu yapmak ister misiniz?',
         error_wp_stopped: 'warp-plus dosyası çalışırken bir sorunla karşılaştı!',
         error_connection_failed: '1.1.1.1 ile bağlantı sağlanamadı.',
-        error_country_failed: 'Seçilen ülkeye bağlanılamıyor.'
+        error_country_failed: 'Seçilen ülkeye bağlanılamıyor.',
+        error_singbox_failed_stop: 'Sing-Box durdurulamadı!',
+        error_singbox_failed_start: 'Sing-Box başlatılamadı!',
+        error_wp_reset_peer: 'Cloudflare bağlantısı beklenmedik bir şekilde kesildi!',
+        error_failed_connection: 'Bağlantı kurulamadı!',
+        error_canceled_by_user: 'İşlem kullanıcı tarafından iptal edildi.',
+        error_helper_not_found: 'Yardımcı dosya uygulama paketinin yanında bulunamadı!'
     },
     about: {
         title: 'Uygulama Hakkında',

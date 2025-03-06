@@ -108,7 +108,7 @@ const EndpointModal: FC<EndpointModalProps> = ({
                                     <div className='split'>
                                         {[...suggestion.ipv4.keys()]
                                             .sort((a, b) => b - a)
-                                            .slice(0, 15)
+                                            .slice(0, 25)
                                             .map((key, index) => (
                                                 <>
                                                     <div
@@ -159,26 +159,32 @@ const EndpointModal: FC<EndpointModalProps> = ({
                                     </div>
                                     {profiles?.length > 0 && (
                                         <div className='split'>
-                                            {profiles.map((item: Profile, key: number) => (
-                                                <>
-                                                    <div
-                                                        key={Number(key)}
-                                                        className={classNames(
-                                                            'item',
-                                                            item.endpoint === endpointInput
-                                                                ? 'disabled'
-                                                                : ''
-                                                        )}
-                                                        role='presentation'
-                                                        onClick={() => {
-                                                            setEndpointSuggestion(item.endpoint);
-                                                            //setShowSuggestion(false);
-                                                        }}
-                                                    >
-                                                        {item.name}
-                                                    </div>
-                                                </>
-                                            ))}
+                                            {profiles.map(
+                                                (item: Profile, key: number) =>
+                                                    typeof item.endpoint === 'string' &&
+                                                    item.endpoint.length > 7 && (
+                                                        <>
+                                                            <div
+                                                                key={Number(key)}
+                                                                className={classNames(
+                                                                    'item',
+                                                                    item.endpoint === endpointInput
+                                                                        ? 'disabled'
+                                                                        : ''
+                                                                )}
+                                                                role='presentation'
+                                                                onClick={() => {
+                                                                    setEndpointSuggestion(
+                                                                        item.endpoint
+                                                                    );
+                                                                    //setShowSuggestion(false);
+                                                                }}
+                                                            >
+                                                                {item.name}
+                                                            </div>
+                                                        </>
+                                                    )
+                                            )}
                                         </div>
                                     )}
                                 </div>
@@ -223,15 +229,20 @@ const EndpointModal: FC<EndpointModalProps> = ({
                     >
                         {appLang?.modal?.update}
                     </div>
-                    <i
-                        role='presentation'
+                    <div
+                        className={classNames('btn', 'btn-update')}
+                        onClick={() => fetchEndpoints(true)}
+                        role='button'
                         ref={updaterRef}
-                        className='material-icons updater'
-                        title={appLang?.modal?.endpoint_update}
-                        onClick={fetchEndpoints}
+                        tabIndex={0}
                     >
-                        &#xeb5a;
-                    </i>
+                        <i
+                            className='material-icons updater'
+                            title={appLang?.modal?.endpoint_update}
+                        >
+                            &#xeb5a;
+                        </i>
+                    </div>
                 </div>
             </div>
         </div>

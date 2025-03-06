@@ -9,7 +9,9 @@ const vietnamese: Language = {
         disconnecting: 'Đang ngắt kết nối ...',
         disconnected: 'Đã ngắt kết nối',
         ip_check: 'Đang kiểm tra IP ...',
-        keep_trying: 'Vui lòng đợi một chút để thử lại...'
+        keep_trying: 'Vui lòng đợi một chút để thử lại...',
+        preparing_rulesets: 'Đang chuẩn bị các bộ quy tắc...',
+        downloading_rulesets_failed: 'Tải xuống các bộ quy tắc không thành công.'
     },
     home: {
         title_warp_based: 'Dựa trên Warp',
@@ -23,7 +25,8 @@ const vietnamese: Language = {
         drawer_update_label: 'Cập nhật mới',
         drawer_speed_test: 'Kiểm tra tốc độ',
         drawer_about: 'Giới thiệu về ứng dụng',
-        drawer_lang: 'Thay đổi ngôn ngữ'
+        drawer_lang: 'Thay đổi ngôn ngữ',
+        drawer_singbox: 'Cài đặt Đường hầm'
     },
     toast: {
         ip_check_please_wait: 'Vui lòng đợi vài giây để kiểm tra lại!',
@@ -34,7 +37,14 @@ const vietnamese: Language = {
         cleared: 'Nhật ký đã được xóa!',
         please_wait: 'Vui lòng đợi ...',
         offline: 'Bạn đang ngoại tuyến!',
-        settings_changed: 'Việc áp dụng cài đặt yêu cầu kết nối lại.'
+        settings_changed: 'Việc áp dụng cài đặt yêu cầu kết nối lại.',
+        hardware_usage: 'Bật tùy chọn này sẽ tăng mức sử dụng tài nguyên phần cứng.',
+        config_added:
+            'Cấu hình đã được thêm thành công, và để sử dụng nó, bạn phải nhấp vào kết nối.',
+        profile_added: 'Điểm cuối đã được thêm thành công vào hồ sơ.',
+        endpoint_added: 'Điểm cuối đã được thay thế thành công.',
+        new_update:
+            'Một phiên bản mới của ứng dụng có sẵn. Bạn có muốn tải xuống và chuẩn bị cài đặt không?'
     },
     settings: {
         title: 'Cài đặt Warp',
@@ -46,7 +56,7 @@ const vietnamese: Language = {
         method_psiphon: 'Psiphon',
         method_psiphon_desc: 'Bật Psiphon',
         method_psiphon_location: 'Quốc gia',
-        method_psiphon_location_auto: 'Tự động',
+        method_psiphon_location_auto: 'ngẫu nhiên',
         method_psiphon_location_desc: 'Chọn IP quốc gia mong muốn',
         endpoint: 'Điểm kết thúc',
         endpoint_desc: 'Kết hợp giữa địa chỉ IP hoặc tên miền, cùng với cổng',
@@ -58,7 +68,7 @@ const vietnamese: Language = {
         proxy_mode_desc: 'Định nghĩa cài đặt Proxy',
         port: 'Cổng Proxy',
         port_desc: 'Định nghĩa cổng proxy của ứng dụng',
-        share_vpn: 'Chia sẻ (LAN)',
+        share_vpn: 'Địa chỉ liên kết',
         share_vpn_desc: 'Chia sẻ proxy qua mạng',
         dns: 'DNS',
         dns_desc: 'Chặn quảng cáo & nội dung người lớn',
@@ -81,6 +91,8 @@ const vietnamese: Language = {
         force_close_desc: 'Không ở lại trong khay hệ thống sau khi thoát',
         shortcut: 'Điều hướng',
         shortcut_desc: 'Phím tắt trên trang chủ',
+        sound_effect: 'hiệu ứng âm thanh',
+        sound_effect_desc: 'phát âm thanh khi kết nối thành công',
         restore: 'Khôi phục',
         restore_desc: 'Áp dụng cài đặt mặc định của ứng dụng',
         scanner: 'Cài đặt máy quét',
@@ -99,14 +111,42 @@ const vietnamese: Language = {
         routing_rules_disabled: 'Tắt',
         routing_rules_items: 'Các mục',
         profile: 'Hồ sơ',
-        profile_desc: 'Điểm kết thúc được bạn lưu'
+        profile_desc: 'Điểm kết thúc được bạn lưu',
+        singbox: 'Cài đặt Singbox',
+        close_singbox: 'Dừng hoạt động',
+        close_singbox_desc: 'Tự động đóng sing-box khi ngắt kết nối',
+        close_helper: 'Dừng trợ lý',
+        close_helper_desc: 'Tự động đóng trợ lý khi thoát',
+        mtu: 'Giá trị MTU',
+        mtu_desc: 'Đặt Đơn vị Truyền tối đa',
+        geo_block: 'Chặn',
+        geo_block_desc: 'Quảng cáo, Phần mềm độc hại, Lừa đảo & Đào tiền mã hóa',
+        geo_rules_ip: 'Định tuyến IP',
+        geo_rules_ip_desc: 'Áp dụng các quy tắc GeoIP',
+        geo_rules_site: 'Định tuyến Web',
+        geo_rules_site_desc: 'Áp dụng các quy tắc GeoSite',
+        geo_nsfw_block: 'Bộ lọc nội dung',
+        geo_nsfw_block_desc: 'Chặn trang web NSFW',
+        more_helper: 'Đối tượng Phật',
+        singbox_log: 'Ghi Log',
+        singbox_log_desc: 'Cài đặt Mức Log',
+        singbox_stack: 'Ngăn Xếp',
+        singbox_stack_desc: 'Cài đặt Loại Ngăn Xếp',
+        singbox_sniff: 'Nghe Gói',
+        singbox_sniff_desc: 'Bật tính năng sniffing và ghi đè điểm đến',
+        singbox_addressing: 'Định địa chỉ',
+        singbox_addressing_desc: 'Đặt loại địa chỉ giao diện',
+        more_duties: 'Nhiệm vụ thêm',
+        beta_release: 'Cập nhật Beta',
+        beta_release_desc: 'Cập nhật thông tin về các phiên bản trước khi phát hành'
     },
     tabs: {
         home: 'Kết nối',
         warp: 'Warp',
         network: 'Mạng',
         scanner: 'Máy quét',
-        app: 'Ứng dụng'
+        app: 'Ứng dụng',
+        singbox: 'Hộp hát'
     },
     modal: {
         endpoint_title: 'Điểm kết thúc',
@@ -114,11 +154,18 @@ const vietnamese: Language = {
         license_desc:
             'Chương trình không cần giấy phép Warp để chạy, nhưng nếu bạn muốn, bạn có thể nhập giấy phép của mình ở đây.',
         license_clear: 'Xóa',
+        test_url_title: 'URL kiểm tra',
+        test_url_desc: 'Địa chỉ kiểm tra kết nối',
+        test_url_update: 'Nhận đề xuất',
         port_title: 'Cổng Proxy',
         restore_title: 'Khôi phục thay đổi',
         restore_desc:
             'Xác nhận việc khôi phục sẽ đưa tất cả các cài đặt của chương trình trở về trạng thái mặc định và kết nối của bạn sẽ bị ngắt.',
         routing_rules_sample: 'Mẫu',
+        routing_rules_alert_tun:
+            'Chỉ các quy tắc định tuyến cho tên miền, ip và ứng dụng sẽ ảnh hưởng đến cấu hình Tun.',
+        routing_rules_alert_system:
+            'Ngoại trừ quy tắc định tuyến ứng dụng, các quy tắc khác sẽ ảnh hưởng đến cấu hình Proxy Hệ thống.',
         endpoint_default: 'Mặc định',
         endpoint_suggested: 'Đề xuất',
         endpoint_latest: 'Mới nhất',
@@ -128,6 +175,9 @@ const vietnamese: Language = {
         profile_name: 'Tiêu đề',
         profile_endpoint: 'Điểm kết thúc',
         profile_limitation: (value) => `Bạn có thể thêm tối đa ${value} điểm kết thúc.`,
+        mtu_title: 'Giá trị MTU',
+        mtu_desc:
+            'Đơn vị Truyền tối đa (MTU) đề cập đến kích thước tối đa của các gói dữ liệu, nên được đặt trong khoảng từ 1000 đến 9999.',
         confirm: 'Tôi xác nhận',
         update: 'Cập nhật',
         cancel: 'Hủy'
@@ -145,6 +195,7 @@ const vietnamese: Language = {
         error_port_already_in_use: (value) =>
             `Cổng ${value} đang được sử dụng bởi chương trình khác; Thay đổi cổng.`,
         error_port_socket: 'Sử dụng cổng khác.',
+        error_port_restart: 'Cổng đang được sử dụng; khởi động lại ...',
         error_unknown_flag: 'Một lệnh không hợp lệ đã được thực thi trong nền.',
         error_deadline_exceeded: 'Hết thời gian kết nối; Thử lại.',
         error_configuration_encountered: 'Cấu hình proxy gặp lỗi!',
@@ -153,9 +204,17 @@ const vietnamese: Language = {
             'Cấu hình proxy không được hỗ trợ trên hệ điều hành của bạn, nhưng bạn có thể sử dụng Warp Proxy thủ công.',
         error_configuring_proxy: (value) => `Lỗi cấu hình proxy cho ${value}!`,
         error_wp_not_found: 'Tệp warp-plus không được tìm thấy cùng với gói ứng dụng!',
+        error_wp_exclusions:
+            'Rất có thể tệp warp-plus đã bị cách ly do cảnh báo dương tính giả và phát hiện sai bởi phần mềm diệt virus, gây ra vấn đề với khả năng của chương trình để truy cập internet một cách tự do.\nChương trình có thể thêm tệp này vào danh sách loại trừ trong một số phần mềm diệt virus nếu được cấp quyền truy cập. Có nên thực hiện điều này không?',
         error_wp_stopped: 'Tệp warp-plus gặp vấn đề khi chạy!',
         error_connection_failed: 'Không thể kết nối với 1.1.1.1.',
-        error_country_failed: 'Không thể kết nối với quốc gia đã chọn.'
+        error_country_failed: 'Không thể kết nối với quốc gia đã chọn.',
+        error_singbox_failed_stop: 'Không thể dừng Hộp hát!',
+        error_singbox_failed_start: 'Không thể khởi động Hộp hát!',
+        error_wp_reset_peer: 'Kết nối đến Cloudflare bị gián đoạn đột ngột!',
+        error_failed_connection: 'Không thể thiết lập kết nối!',
+        error_canceled_by_user: 'Hoạt động đã bị hủy bởi người dùng.',
+        error_helper_not_found: 'Tệp trợ giúp không được tìm thấy bên cạnh gói ứng dụng!'
     },
     about: {
         title: 'Giới thiệu về ứng dụng',

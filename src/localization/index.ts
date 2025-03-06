@@ -2,15 +2,31 @@ import enUS from './en';
 import faIR from './fa';
 import ruRU from './ru';
 import cnCN from './cn';
-import deDE from './de';
 import trTR from './tr';
 import idID from './id';
 import arSA from './ar';
 import viVN from './vi';
 import ptBR from './pt';
+import urPK from './ur';
+import esCU from './es';
+import amET from './am';
+import myMM from './my';
 import { defaultSettings } from '../defaultSettings';
 
-export type LanguageType = 'fa' | 'en' | 'ru' | 'cn' | 'de' | 'tr' | 'id' | 'ar' | 'vi' | 'pt';
+export type LanguageType =
+    | 'fa'
+    | 'en'
+    | 'ru'
+    | 'cn'
+    | 'tr'
+    | 'id'
+    | 'ar'
+    | 'vi'
+    | 'pt'
+    | 'ur'
+    | 'es'
+    | 'am'
+    | 'my';
 type directionType = 'rtl' | 'ltr';
 
 const lang = defaultSettings.lang as LanguageType;
@@ -21,12 +37,15 @@ const direction = {
     en: 'ltr',
     ru: 'ltr',
     cn: 'ltr',
-    de: 'ltr',
     tr: 'ltr',
     id: 'ltr',
     ar: 'rtl',
     vi: 'ltr',
-    pt: 'ltr'
+    pt: 'ltr',
+    ur: 'rtl',
+    es: 'ltr',
+    am: 'ltr',
+    my: 'ltr'
 };
 
 const getDirection = () => {
@@ -49,12 +68,15 @@ const translate = {
     en: enUS,
     ru: ruRU,
     cn: cnCN,
-    de: deDE,
     tr: trTR,
     id: idID,
     ar: arSA,
     vi: viVN,
-    pt: ptBR
+    pt: ptBR,
+    ur: urPK,
+    es: esCU,
+    am: amET,
+    my: myMM
 };
 
 const getTranslate = (forceLang?: string) => {

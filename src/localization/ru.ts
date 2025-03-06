@@ -9,7 +9,9 @@ const russian: Language = {
         disconnecting: 'Отключение ...',
         disconnected: 'Отключено',
         ip_check: 'Проверка IP ...',
-        keep_trying: 'Пожалуйста, подождите немного, чтобы попытаться снова...'
+        keep_trying: 'Пожалуйста, подождите немного, чтобы попытаться снова...',
+        preparing_rulesets: 'Подготовка наборов правил...',
+        downloading_rulesets_failed: 'Не удалось загрузить наборы правил.'
     },
     home: {
         title_warp_based: 'На основе Warp',
@@ -23,7 +25,8 @@ const russian: Language = {
         drawer_update_label: 'Новое обновление',
         drawer_speed_test: 'Тест скорости',
         drawer_about: 'О приложении',
-        drawer_lang: 'Изменить язык'
+        drawer_lang: 'Изменить язык',
+        drawer_singbox: 'Настройки туннеля'
     },
     toast: {
         ip_check_please_wait: 'Пожалуйста, подождите несколько секунд, чтобы повторить проверку!',
@@ -34,7 +37,13 @@ const russian: Language = {
         cleared: 'Журнал очищен!',
         please_wait: 'Пожалуйста, подождите ...',
         offline: 'Вы не подключены к интернету!',
-        settings_changed: 'Применение настроек требует повторного подключения.'
+        settings_changed: 'Применение настроек требует повторного подключения.',
+        hardware_usage: 'Включение этой опции увеличит использование ресурсов оборудования.',
+        config_added:
+            'Конфигурация успешно добавлена, и для ее использования вам нужно нажать на подключение.',
+        profile_added: 'Точка доступа успешно добавлена в профиль.',
+        endpoint_added: 'Конечная точка успешно заменена.',
+        new_update: 'Доступна новая версия приложения. Хотите скачать и подготовить её к установке?'
     },
     settings: {
         title: 'Настройки Warp',
@@ -46,7 +55,7 @@ const russian: Language = {
         method_psiphon: 'Psiphon',
         method_psiphon_desc: 'Включить Psiphon',
         method_psiphon_location: 'Страна',
-        method_psiphon_location_auto: 'Автоматически',
+        method_psiphon_location_auto: 'случайный',
         method_psiphon_location_desc: 'Выберите желаемый IP-адрес страны',
         endpoint: 'Конечная точка',
         endpoint_desc: 'Комбинация IP-адреса или доменного имени вместе с портом',
@@ -58,7 +67,7 @@ const russian: Language = {
         proxy_mode_desc: 'Определение настроек прокси',
         port: 'Порт прокси',
         port_desc: 'Установите порт прокси для приложения',
-        share_vpn: 'Поделиться (LAN)',
+        share_vpn: 'Адрес привязки',
         share_vpn_desc: 'Поделиться прокси в сети',
         dns: 'DNS',
         dns_desc: 'Блокировать рекламу и контент для взрослых',
@@ -81,6 +90,8 @@ const russian: Language = {
         force_close_desc: 'Не оставаться в системном трее после выхода',
         shortcut: 'Навигатор',
         shortcut_desc: 'Ярлыки на главной странице',
+        sound_effect: 'звуковой эффект',
+        sound_effect_desc: 'воспроизводит звук при успешном подключении',
         restore: 'Восстановить',
         restore_desc: 'Применить настройки приложения по умолчанию',
         scanner: 'Настройки сканера',
@@ -99,14 +110,42 @@ const russian: Language = {
         routing_rules_disabled: 'Отключено',
         routing_rules_items: 'Предметы',
         profile: 'Профиль',
-        profile_desc: 'Сохраненные вами конечные точки'
+        profile_desc: 'Сохраненные вами конечные точки',
+        singbox: 'Настройки Singbox',
+        close_singbox: 'Остановка операции',
+        close_singbox_desc: 'Автоматически закрывать Singbox при отключении',
+        close_helper: 'Остановка помощника',
+        close_helper_desc: 'Автоматически закрывать помощник при выходе',
+        mtu: 'Значение MTU',
+        mtu_desc: 'Установить максимальную единицу передачи',
+        geo_block: 'Блокировка',
+        geo_block_desc: 'Реклама, вредоносное ПО, фишинг и майнеры криптовалют',
+        geo_rules_ip: 'Маршрутизация IP',
+        geo_rules_ip_desc: 'Применение правил GeoIP',
+        geo_rules_site: 'Веб-маршрутизация',
+        geo_rules_site_desc: 'Применение правил GeoSite',
+        geo_nsfw_block: 'Фильтр контента',
+        geo_nsfw_block_desc: 'Блокировка сайтов NSFW',
+        more_helper: 'Настройки ассистента',
+        singbox_log: 'Журналирование',
+        singbox_log_desc: 'Установить уровень журнала',
+        singbox_stack: 'Стек',
+        singbox_stack_desc: 'Установить тип стека',
+        singbox_sniff: 'Перехват',
+        singbox_sniff_desc: 'Включить сканирование и переопределить назначение',
+        singbox_addressing: 'Адресация',
+        singbox_addressing_desc: 'Установите тип адреса интерфейса',
+        more_duties: 'Дополнительные обязанности',
+        beta_release: 'Бета-обновление',
+        beta_release_desc: 'Будьте в курсе предварительных версий'
     },
     tabs: {
         home: 'Связь',
         warp: 'Warp',
         network: 'Сеть',
         scanner: 'Сканер',
-        app: 'заявка'
+        app: 'заявка',
+        singbox: 'Singbox'
     },
     modal: {
         endpoint_title: 'Конечная точка',
@@ -114,11 +153,18 @@ const russian: Language = {
         license_desc:
             'Для работы программы не обязательно наличие лицензии Warp, но если вы хотите, вы можете ввести свою лицензию здесь.',
         license_clear: 'Очистить',
+        test_url_title: 'Тестовый URL',
+        test_url_desc: 'Адрес тестирования подключения',
+        test_url_update: 'Получение предложений',
         port_title: 'Порт прокси',
         restore_title: 'Восстановить изменения',
         restore_desc:
             'Подтверждая операцию восстановления изменений, все настройки программы вернутся к состоянию по умолчанию, и ваше подключение будет отключено.',
         routing_rules_sample: 'Пример',
+        routing_rules_alert_tun:
+            'Только правила маршрутизации для домена, ip и приложения повлияют на конфигурацию Tun.',
+        routing_rules_alert_system:
+            'За исключением правила маршрутизации приложения, другие правила повлияют на конфигурацию системного прокси.',
         endpoint_default: 'По умолчанию',
         endpoint_suggested: 'предложено',
         endpoint_latest: 'Последний',
@@ -128,6 +174,9 @@ const russian: Language = {
         profile_name: 'Название',
         profile_endpoint: 'Конечная точка',
         profile_limitation: (value) => `Вы можете добавить максимум ${value} конечных точек.`,
+        mtu_title: 'Значение MTU',
+        mtu_desc:
+            'Максимальная единица передачи (MTU) относится к максимальному размеру пакетов данных, который должен быть установлен в пределах от 1000 до 9999.',
         confirm: 'Подтверждаю',
         update: 'Обновить',
         cancel: 'Отмена'
@@ -146,6 +195,7 @@ const russian: Language = {
         error_port_already_in_use: (value) =>
             `Порт ${value} используется другой программой; Измени это.`,
         error_port_socket: 'Использовать другой порт.',
+        error_port_restart: 'Порт занят; перезапуск ...',
         error_unknown_flag: 'В фоновом режиме была выполнена недопустимая команда.',
         error_deadline_exceeded: 'Время ожидания соединения истекло; Попробуйте еще раз.',
         error_configuration_encountered: 'В конфигурации прокси произошла ошибка!',
@@ -154,9 +204,17 @@ const russian: Language = {
             'Конфигурация прокси-сервера не поддерживается в вашей операционной системе, но вы можете использовать Warp Proxy вручную.',
         error_configuring_proxy: (value) => `Ошибка настройки прокси-сервера для ${value}!`,
         error_wp_not_found: 'Файл warp-plus не находится рядом с пакетом приложения.',
+        error_wp_exclusions:
+            'Файл warp-plus, вероятно, был помещен в карантин из-за ложного срабатывания и неправильного обнаружения антивирусом, что вызвало проблемы с доступом программы к интернету.\nПрограмма может добавить указанный файл в список исключений в некоторых антивирусах, если будет предоставлен доступ. Это должно быть сделано?',
         error_wp_stopped: 'Файл warp-plus столкнулся с проблемой при запуске!',
         error_connection_failed: 'Подключение к 1.1.1.1 невозможно.',
-        error_country_failed: 'Невозможно подключиться к выбранной стране.'
+        error_country_failed: 'Невозможно подключиться к выбранной стране.',
+        error_singbox_failed_stop: 'Не удалось остановить Sing-Box!',
+        error_singbox_failed_start: 'Не удалось запустить Sing-Box!',
+        error_wp_reset_peer: 'Соединение с Cloudflare было неожиданно прервано!',
+        error_failed_connection: 'Не удалось установить соединение!',
+        error_canceled_by_user: 'Операция была отменена пользователем.',
+        error_helper_not_found: 'Файл помощника не найден рядом с пакетом приложения!'
     },
     about: {
         title: 'О приложении',

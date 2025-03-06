@@ -26,7 +26,21 @@ export type settingsKeys =
     | 'forceClose'
     | 'shortcut'
     | 'dataUsage'
-    | 'asn';
+    | 'asn'
+    | 'closeHelper'
+    | 'singBoxMTU'
+    | 'singBoxGeoIp'
+    | 'singBoxGeoSite'
+    | 'singBoxGeoBlock'
+    | 'singBoxGeoNSFW'
+    | 'singBoxLog'
+    | 'singBoxStack'
+    | 'singBoxSniff'
+    | 'singBoxAddrType'
+    | 'restartCounter'
+    | 'betaRelease'
+    | 'soundEffect'
+    | 'testUrl';
 
 const date = new Date();
 const getTimeZone = date?.toString().toLowerCase();
@@ -57,9 +71,18 @@ export const defaultSettings = {
     scanResult: '',
     profiles: '[]',
     forceClose: false,
-    shortcut: false,
+    shortcut: true,
     dataUsage: false,
-    asn: 'UNK'
+    asn: 'UNK',
+    closeHelper: true,
+    singBoxMTU: 9000,
+    singBoxGeoBlock: false,
+    singBoxGeoNSFW: false,
+    singBoxSniff: true,
+    restartCounter: 0,
+    betaRelease: false,
+    soundEffect: false,
+    testUrl: 'https://connectivity.cloudflareclient.com/cdn-cgi/trace'
 };
 
 export const countries: { value: string; label: string }[] = [
@@ -104,17 +127,87 @@ export const languages: { value: string; label: string }[] = [
     { value: 'en', label: 'English' },
     { value: 'cn', label: '中文' },
     { value: 'ru', label: 'Русский' },
-    { value: 'de', label: 'Deutsch' },
     { value: 'tr', label: 'Türkçe' },
     { value: 'id', label: 'Indonesia' },
     { value: 'ar', label: 'العربية' },
     { value: 'pt', label: 'Português (Brasil)' },
-    { value: 'vi', label: 'Tiếng Việt' }
+    { value: 'vi', label: 'Tiếng Việt' },
+    { value: 'ur', label: 'اردو' }
 ];
 
 export const dnsServers: { value: string; label: string }[] = [
     { value: '1.1.1.1', label: 'Cloudflare' },
-    { value: '8.8.8.8', label: 'Google' },
-    { value: '94.140.14.14', label: 'Adguard' },
-    { value: '94.140.14.15', label: 'Adguard Family' }
+    { value: '1.1.1.2', label: 'Cloudflare Security' },
+    { value: '1.1.1.3', label: 'Cloudflare Family' }
+];
+
+export const singBoxGeoIp: { label: string; geoIp: string }[] = [
+    { label: 'None', geoIp: 'none' },
+    {
+        label: '🇮🇷 Iran',
+        geoIp: 'ir'
+    },
+    {
+        label: '🇨🇳 China',
+        geoIp: 'cn'
+    },
+    {
+        label: '🇷🇺 Russia',
+        geoIp: 'ru'
+    },
+    {
+        label: '🇦🇫 Afghanistan',
+        geoIp: 'af'
+    },
+    {
+        label: '🇹🇷 Turkey',
+        geoIp: 'tr'
+    },
+    {
+        label: '🇮🇩 Indonesia',
+        geoIp: 'id'
+    },
+    {
+        label: '🇧🇷 Brazil',
+        geoIp: 'br'
+    }
+];
+
+export const singBoxGeoSite: { label: string; geoSite: string }[] = [
+    { label: 'None', geoSite: 'none' },
+    {
+        label: '🇮🇷 Iran',
+        geoSite: 'ir'
+    },
+    {
+        label: '🇨🇳 China',
+        geoSite: 'cn'
+    },
+    {
+        label: '🇷🇺 Russia',
+        geoSite: 'category-ru'
+    }
+];
+
+export const singBoxLog: { value: string; label: string }[] = [
+    { value: 'disabled', label: 'Disabled' },
+    { value: 'trace', label: 'Trace' },
+    { value: 'debug', label: 'Debug' },
+    { value: 'info', label: 'Info' },
+    { value: 'warn', label: 'Warn' },
+    { value: 'error', label: 'Error' },
+    { value: 'fatal', label: 'Fatal' },
+    { value: 'panic', label: 'Panic' }
+];
+
+export const singBoxStack: { value: string; label: string }[] = [
+    { value: 'mixed', label: 'Mixed' },
+    { value: 'system', label: 'System' },
+    { value: 'gvisor', label: 'gVisor' }
+];
+
+export const singBoxAddrType: { value: string; label: string }[] = [
+    { value: 'v64', label: 'Automatic' },
+    { value: 'v4', label: 'IPv4' },
+    { value: 'v6', label: 'IPv6' }
 ];

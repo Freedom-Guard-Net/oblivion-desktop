@@ -2,8 +2,9 @@ import { IpcMainEvent } from 'electron';
 import settings from 'electron-settings';
 import { countries, defaultSettings } from '../../defaultSettings';
 import { removeDirIfExists } from './utils';
-import { stuffPath } from '../ipcListeners/wp';
 import { getTranslate } from '../../localization';
+import { stuffPath } from '../../constants';
+import WarpPlusManager from './wpManager';
 //import { customEvent } from './customEvent';
 //import { getTranslateElectron } from '../../localization/electron';
 //import fs from 'fs';
@@ -13,26 +14,42 @@ let appLang = getTranslate('en');
 const randomCountry = () => countries[Math.floor(Math.random() * countries.length)]?.value || 'DE';
 
 export const getUserSettings = async () => {
-    const [endpoint, ipType, port, location, license, method, hostIP, rtt, reserved, lang, dns] =
-        await Promise.all([
-            settings.get('endpoint'),
-            settings.get('ipType'),
-            settings.get('port'),
-            settings.get('location'),
-            settings.get('license'),
-            settings.get('method'),
-            settings.get('hostIP'),
-            settings.get('rtt'),
-            settings.get('reserved'),
-            settings.get('lang'),
-            settings.get('dns')
-        ]);
+    const [
+        endpoint,
+        ipType,
+        port,
+        location,
+        license,
+        method,
+        hostIP,
+        rtt,
+        reserved,
+        lang,
+        dns,
+        testUrl
+    ] = await Promise.all([
+        settings.get('endpoint'),
+        settings.get('ipType'),
+        settings.get('port'),
+        settings.get('location'),
+        settings.get('license'),
+        settings.get('method'),
+        settings.get('hostIP'),
+        settings.get('rtt'),
+        settings.get('reserved'),
+        settings.get('lang'),
+        settings.get('dns'),
+        settings.get('testUrl')
+    ]);
     appLang = getTranslate(String(typeof lang !== 'undefined' ? lang : defaultSettings.lang));
 
     return [
         '--bind',
         `${typeof hostIP === 'string' && hostIP.length > 0 ? hostIP : defaultSettings.hostIP}:${typeof port === 'string' || typeof port === 'number' ? port : defaultSettings.port}`,
-        ...(typeof license === 'string' && license !== '' ? ['--key', license] : []),
+        /*...(typeof license === 'string' && license !== '' ? ['--key', license] : []),*/
+        ...(typeof testUrl === 'string' && testUrl !== '' && testUrl !== defaultSettings.testUrl
+            ? ['--test-url', testUrl]
+            : []),
         ...(typeof method === 'string'
             ? method === 'gool'
                 ? ['--gool']
@@ -80,7 +97,11 @@ export const getUserSettings = async () => {
 
 const wpErrorTranslation: Record<string, (params: { [key: string]: string }) => string> = {
     'bind: address already in use': ({ port }) => appLang.log.error_port_already_in_use(port),
-    'Only one usage of each socket address': () => appLang.log.error_port_socket,
+    'Only one usage of each socket address': () => {
+        WarpPlusManager.restartApp();
+        //return appLang.log.error_port_socket;
+        return 'error_port_restart';
+    },
     'Invalid license': () => appLang.log.error_invalid_license,
     'Too many connected devices': () => appLang.log.error_too_many_connected,
     'Access is denied': () => appLang.log.error_access_denied,
@@ -91,14 +112,20 @@ const wpErrorTranslation: Record<string, (params: { [key: string]: string }) => 
     'parse args: unknown flag': () => appLang.log.error_unknown_flag,
     'context deadline exceeded': () => appLang.log.error_deadline_exceeded,
     'connection test failed': () => appLang.log.error_connection_failed,
-    'parse args: --country': () => appLang.log.error_country_failed
+    'parse args: --country': () => appLang.log.error_country_failed,
+    'connection reset by peer': () => {
+        //disconnectApp();
+        return appLang.log.error_wp_reset_peer;
+    }
 };
 
-export const handleWpErrors = (strData: string, ipcEvent: IpcMainEvent, port: string) => {
+export const handleWpErrors = (strData: string, port: string, ipcEvent?: IpcMainEvent) => {
     Object.entries(wpErrorTranslation).forEach(([errorMsg, translator]) => {
         if (strData.includes(errorMsg)) {
-            ipcEvent.reply('guide-toast', translator({ port }));
-            removeDirIfExists(stuffPath);
+            ipcEvent?.reply('guide-toast', translator({ port }));
+            removeDirIfExists(stuffPath).catch((err) =>
+                console.log('removeDirIfExists Error:', err.message)
+            );
         }
     });
 };

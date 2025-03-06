@@ -42,9 +42,9 @@ Cloudflare Warp فراهم می‌کند.
 
 ## ویژگی‌ها
 
--   **وی‌پی‌ان امن**: پیاده‌سازی اختصاصی WireGuard با زبان Go.
--   **متن‌باز**: به‌صورت اپن‌سورس، با تأکید بر شفافیت و مشارکت اجتماعی؛ ضمن استفاده از گیت‌هاب اکشن برای بیلد خودکار.
--   **کاربرپسند**: رابط کاربری ساده و آسان.
+- **وی‌پی‌ان امن**: پیاده‌سازی اختصاصی WireGuard با زبان Go.
+- **متن‌باز**: به‌صورت اپن‌سورس، با تأکید بر شفافیت و مشارکت اجتماعی؛ ضمن استفاده از گیت‌هاب اکشن برای بیلد خودکار.
+- **کاربرپسند**: رابط کاربری ساده و آسان.
 
 <p align="center">
     <img src="screenshot/oblivion.jpg" alt="oblivion.jpg">
@@ -74,14 +74,14 @@ Cloudflare Warp فراهم می‌کند.
             <td>
                 :white_check_mark: پروکسی <small>(بدون تغییر)</small><br>
                 :white_check_mark: پروکسی سیستم <small>(با PAC)</small><br>
-                :white_large_square: TUN
+                :white_check_mark: TUN <small>(با سینگ‌باکس)</small>
             </td>
         </tr>
         <tr>
             <td>قوانین مسیریابی</td>
             <td>
                 :white_check_mark: پروکسی سیستم<br>
-                :white_large_square: GeoIP
+                :white_check_mark: دیتابیس Geo
             </td>
         </tr>
         <tr>
@@ -99,12 +99,15 @@ Cloudflare Warp فراهم می‌کند.
                 :white_check_mark:  انگلیسی<br>
                 :white_check_mark:  چینی<br>
                 :white_check_mark:  روسی<br>
-                :white_check_mark:  آلمانی<br>
                 :white_check_mark:  ترکی<br>
                 :white_check_mark:  اندونزیایی <br>
                 :white_check_mark:  عربی <br>
-                :white_check_mark:  پرتغالی (برزیل)  <br>
-                :white_check_mark:  ویتنامی
+                :white_check_mark:  پرتغالی  <br>
+                :white_check_mark:  ویتنامی <br>
+                :white_check_mark:  اردو <br>
+                :white_check_mark:  اسپانیایی <br>
+                :white_check_mark:  برمه‌ای <br>
+                :white_check_mark:  امهری
             </td>
         </tr>
         <tr>
@@ -123,8 +126,9 @@ Cloudflare Warp فراهم می‌کند.
                 :white_check_mark: اسکنر<br>
                 :white_check_mark: پینگ<br>
                 :white_check_mark: دسترس‌پذیری<br>
-                :white_large_square: بروزرسانی داخلی<br>
-                :white_large_square: تست سرعت
+                :white_check_mark: تست سرعت<br>
+                :white_check_mark: بروزرسانی داخلی <small>(ویندوز)</small><br>
+                :white_large_square: قطع اضطراری
             </td>
         </tr>
     </tbody>
@@ -134,71 +138,68 @@ Cloudflare Warp فراهم می‌کند.
 ## دانلود
 
 <div align="right">
-<table>
-    <thead align="right">
-        <tr>
-            <th>سیستم‌عامل</th>
-            <th>دانلود</th>
-            <th>سازگاری</th>
-        </tr>
-    </thead>
-    <tbody align=right>
-        <tr>
-            <td>ویندوز</td>
-            <td>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Setup-x64-0C88D8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Setup-arm64-0C88D8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Setup-x86-0C88D8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Portable-x64-005AA8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Portable-arm64-005AA8.svg?logo=windows"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/Portable-x86-005AA8.svg?logo=windows"></a><br>
-            </td>
-            <td>
-                v10<br>
-                v11
-            </td>
-        </tr>
-        <tr>
-            <td>مک‌اواس</td>
-            <td>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/DMG-arm64-F0F0F1.svg?logo=apple"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/DMG-x64-5D5D5D.svg?logo=apple"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/ZIP-arm64-F0F0F1.svg?logo=apple" /></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/ZIP-x64-5D5D5D.svg?logo=apple" /></a>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>لینوکس</td>
-            <td>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/DEB-x64-DC470E.svg?logo=debian"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/DEB-arm64-DC470E.svg?logo=debian"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/RPM-x64-01ABD2.svg?logo=redhat"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/RPM-arm64-01ABD2.svg?logo=redhat"></a><br>    
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/tar.xz-x64-EDC204.svg?logo=linux"></a><br>
-                <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest"><img src="https://img.shields.io/badge/tar.xz-arm64-EDC204.svg?logo=linux"></a><br>             
-            </td>
-            <td>
-                گنوم<br>
-                کی‌دی‌ای
-            </td>
-        </tr>
-        <td>اندروید</td>
-            <td>
-                <a href="https://github.com/bepass-org/oblivion/releases/latest"><img src="https://img.shields.io/badge/APK-Universal-044d29.svg?logo=android"></a><br>
-                <a href="https://play.google.com/store/apps/details?id=org.bepass.oblivion"><img src="https://img.shields.io/badge/APK-Universal-044d29.svg?logo=googleplay"></a>
-            </td>
-            <td>v6+</td>
-        </tr>
-        <tr>
-            <td>iOS</td>
-            <td>
-                <small>Coming Soon ...</small>
-            </td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+    <table>
+        <thead align="right">
+            <tr>
+                <th>سیستم‌عامل / معماری</th>
+                <th>سازگاری</th>
+            </tr>
+        </thead>
+        <tbody align="right">
+            <tr>
+                <td>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-x64.exe"><img src="https://img.shields.io/badge/Windows-Setup x64-0C88D8.svg?logo=gitforwindows"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-x64.zip"><img src="https://img.shields.io/badge/Windows-Portable x64-005AA8.svg?logo=gitforwindows"></a>
+                    <br>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-arm64.exe"><img src="https://img.shields.io/badge/Windows-Setup arm64-0C88D8.svg?logo=gitforwindows"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-arm64.zip"><img src="https://img.shields.io/badge/Windows-Portable arm64-005AA8.svg?logo=gitforwindows"></a>
+                    <br>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-ia32.exe"><img src="https://img.shields.io/badge/Windows-Setup x86-0C88D8.svg?logo=gitforwindows"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-win-ia32.zip"><img src="https://img.shields.io/badge/Windows-Portable x86-005AA8.svg?logo=gitforwindows"></a>
+                </td>
+                <td>
+                    10+<br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-mac-arm64.dmg"><img src="https://img.shields.io/badge/macOS-DMG arm64-F0F0F1.svg?logo=apple"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-mac-arm64.zip"><img src="https://img.shields.io/badge/macOS-ZIP arm64-9e9e9e.svg?logo=apple" /></a><br>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-mac-x64.dmg"><img src="https://img.shields.io/badge/macOS-DMG x64-F0F0F1.svg?logo=apple"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-mac-x64.zip"><img src="https://img.shields.io/badge/macOS-ZIP x64-9e9e9e.svg?logo=apple" /></a>
+                </td>
+                <td>10.15+</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-amd64.deb"><img src="https://img.shields.io/badge/Linux-DEB x64-DC470E.svg?logo=debian"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-x86_64.rpm"><img src="https://img.shields.io/badge/Linux-RPM x64-01ABD2.svg?logo=redhat"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-x64.tar.xz"><img src="https://img.shields.io/badge/Linux-tar.xz x64-EDC204.svg?logo=linux"></a>
+                    <br>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-arm64.deb"><img src="https://img.shields.io/badge/Linux-DEB arm64-DC470E.svg?logo=debian"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-aarch64.rpm"><img src="https://img.shields.io/badge/Linux-RPM arm64-01ABD2.svg?logo=redhat"></a>
+                    <a href="https://github.com/bepass-org/oblivion-desktop/releases/latest/download/oblivion-desktop-linux-arm64.tar.xz"><img src="https://img.shields.io/badge/Linux-tar.xz arm64-EDC204.svg?logo=linux"></a>         
+                </td>
+                <td>
+                    گنوم<br>
+                    کی‌دی‌ای
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://github.com/bepass-org/oblivion/releases/latest"><img src="https://img.shields.io/badge/Android-APK Universal-0d7365.svg?logo=android"></a>
+                    <a href="https://play.google.com/store/apps/details?id=org.bepass.oblivion"><img src="https://img.shields.io/badge/Android-APK Universal-044d29.svg?logo=googleplay"></a>
+                </td>
+                <td>6+</td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="https://img.shields.io/badge/iOS-Coming soon ...-pink.svg?logo=apple">
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 ## به مشکل برخوردید 🐞؟
@@ -220,9 +221,9 @@ Cloudflare Warp فراهم می‌کند.
 
 ## بیشتر بدانید
 
--   [سوالات متداول](FAQ.md)
--   [لاینسس](LICENSE.md)
--   [امنیت](SECURITY.md)
+- [سوالات متداول](FAQ.md)
+- [لاینسس](LICENSE.md)
+- [امنیت](SECURITY.md)
 
 ![virustotal.jpg](screenshot/virustotal.jpg)
 
@@ -230,18 +231,19 @@ Cloudflare Warp فراهم می‌کند.
 
 این پروژه بر شانه‌های اشخاصی ایستاده است و ما از کمک‌ها و الهام‌بخشی دوستان زیر به‌ شدت سپاسگزاریم:
 
--   [Cloudflare Warp](https://www.cloudflare.com/application/terms/)
--   [warp-plus](https://github.com/bepass-org/warp-plus/) (یوسف قبادی و مارک پشم‌فروش)
--   [Oblivion](https://github.com/bepass-org/oblivion)
--   [Electron](https://www.electronjs.org/)
--   [React](https://github.com/facebook/react)
--   [electron-react-boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
--   [electron-builder](https://github.com/electron-userland/electron-builder)
--   [regedit](https://www.npmjs.com/package/regedit)
--   [sing-box](https://github.com/SagerNet/sing-box)
--   [Iran Sing-box rules](https://github.com/Chocolate4U/Iran-sing-box-rules)
--   [Shabnam Font](https://rastikerdar.github.io/shabnam-font/) (Saber Rastikerdar)
--   [و دیگران 🧡](package.json)
+- [Cloudflare Warp](https://www.cloudflare.com/application/terms/)
+- [warp-plus](https://github.com/bepass-org/warp-plus/) (یوسف قبادی و مارک پشم‌فروش)
+- [Oblivion](https://github.com/bepass-org/oblivion)
+- [Oblivion Helper](https://github.com/ShadowZagrosDev/oblivion-helper) (GPLv3)
+- [Electron](https://www.electronjs.org/)
+- [React](https://github.com/facebook/react)
+- [electron-react-boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
+- [electron-builder](https://github.com/electron-userland/electron-builder)
+- [regedit](https://www.npmjs.com/package/regedit)
+- [Iran Sing-box rules](https://github.com/Chocolate4U/Iran-sing-box-rules)
+- [Shabnam Font](https://rastikerdar.github.io/shabnam-font/) (Saber Rastikerdar)
+- [Zag-NetStats](https://github.com/ShadowZagrosDev/Zag-NetStats)
+- [و دیگران 🧡](package.json)
 
 ## مشارکت‌کنندگان
 

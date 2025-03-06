@@ -1,6 +1,6 @@
 import { Menu, shell, BrowserWindow } from 'electron';
 import { exitTheApp } from './lib/utils';
-import { regeditVbsDirPath } from './main';
+//import { regeditVbsDirPath } from '../constants';
 
 export default class MenuBuilder {
     mainWindow: BrowserWindow;
@@ -48,7 +48,7 @@ export default class MenuBuilder {
                         label: '&Exit',
                         accelerator: 'Ctrl+Q',
                         click: async () => {
-                            await exitTheApp(this.mainWindow);
+                            await exitTheApp();
                         }
                     }
                 ]

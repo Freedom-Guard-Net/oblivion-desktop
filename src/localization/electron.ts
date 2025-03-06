@@ -4,27 +4,46 @@ import enUS from './en';
 import faIR from './fa';
 import ruRU from './ru';
 import cnCN from './cn';
-import deDE from './de';
 import trTR from './tr';
 import idID from './id';
 import arSA from './ar';
 import viVN from './vi';
 import ptBR from './pt';
+import urPK from './ur';
+import esCU from './es';
+import amET from './am';
+import myMM from './my';
 import { defaultSettings } from '../defaultSettings';
 
-type LanguageType = 'fa' | 'en' | 'ru' | 'cn' | 'de' | 'tr' | 'id' | 'ar' | 'vi' | 'pt';
+type LanguageType =
+    | 'fa'
+    | 'en'
+    | 'ru'
+    | 'cn'
+    | 'tr'
+    | 'id'
+    | 'ar'
+    | 'vi'
+    | 'pt'
+    | 'ur'
+    | 'es'
+    | 'am'
+    | 'my';
 
 const translate = {
     fa: faIR,
     en: enUS,
     ru: ruRU,
     cn: cnCN,
-    de: deDE,
     tr: trTR,
     id: idID,
     ar: arSA,
     vi: viVN,
-    pt: ptBR
+    pt: ptBR,
+    ur: urPK,
+    es: esCU,
+    am: amET,
+    my: myMM
 };
 
 export const getTranslateElectron = () => {

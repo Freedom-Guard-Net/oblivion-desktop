@@ -22,6 +22,9 @@ const useSettings = () => {
     const [showLicenseModal, setShowLicenseModal] = useState<boolean>(false);
     //const [gool, setGool] = useState<undefined | boolean>();
     const [method, setMethod] = useState<undefined | string>('');
+    const [proxyMode, setProxyMode] = useState<string>('');
+    const [testUrl, setTestUrl] = useState<string>();
+    const [showTestUrlModal, setShowTestUrlModal] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -34,30 +37,32 @@ const useSettings = () => {
     useGoBackOnEscape();
 
     useEffect(() => {
-        /*settings.get('scan').then((value) => {
-            setScan(typeof value === 'undefined' ? defaultSettings.scan : value);
-        });*/
-        /*settings.get('endpoint').then((value) => {
-            setEndpoint(typeof value === 'undefined' ? defaultSettings.endpoint : value);
-        });*/
-        /*settings.get('ipType').then((value) => {
-            setIpType(typeof value === 'undefined' ? defaultSettings.ipType : value);
-        });*/
-        /*settings.get('psiphon').then((value) => {
-            setPsiphon(typeof value === 'undefined' ? defaultSettings.psiphon : value);
-        });*/
-        settings.get('location').then((value) => {
-            setLocation(typeof value === 'undefined' ? defaultSettings.location : value);
-        });
-        settings.get('license').then((value) => {
-            setLicense(typeof value === 'undefined' ? defaultSettings.license : value);
-        });
-        /*settings.get('gool').then((value) => {
-            setGool(typeof value === 'undefined' ? defaultSettings.gool : value);
-        });*/
-        settings.get('method').then((value) => {
-            setMethod(typeof value === 'undefined' ? defaultSettings.method : value);
-        });
+        settings
+            .getMultiple(['location', 'license', 'method', 'proxyMode', 'testUrl'])
+            .then((values) => {
+                setLocation(
+                    typeof values.location === 'undefined'
+                        ? defaultSettings.location
+                        : values.location
+                );
+                setLicense(
+                    typeof values.license === 'undefined' ? defaultSettings.license : values.license
+                );
+                setMethod(
+                    typeof values.method === 'undefined' ? defaultSettings.method : values.method
+                );
+                setProxyMode(
+                    typeof values.proxyMode === 'undefined'
+                        ? defaultSettings.proxyMode
+                        : values.proxyMode
+                );
+                setTestUrl(
+                    typeof values.testUrl === 'undefined' ? defaultSettings.testUrl : values.testUrl
+                );
+            })
+            .catch((error) => {
+                console.error('Error fetching settings:', error);
+            });
 
         ipcRenderer.on('tray-menu', (args: any) => {
             if (args.key === 'changePage') {
@@ -115,9 +120,11 @@ const useSettings = () => {
     );
 
     const onEnablePsiphon = useCallback(() => {
+        //if (proxyMode !== 'tun') {
         setMethod('psiphon');
         settings.set('method', 'psiphon');
         settingsHaveChangedToast({ ...{ isConnected, isLoading, appLang } });
+        //}
     }, [isConnected, isLoading, appLang]);
 
     const onKeyDownPsiphon = useCallback(
@@ -150,13 +157,36 @@ const useSettings = () => {
         [appLang?.settings?.method_psiphon_location_auto]
     );
 
-    const methodIsWarp = useMemo(() => method === '', [method]);
-    const methodIsGool = useMemo(() => method === 'gool', [method]);
-    const methodIsPsiphon = useMemo(() => method === 'psiphon', [method]);
+    const methodIsWarp = useMemo(() => typeof method !== 'undefined' && method === '', [method]);
+    const methodIsGool = useMemo(
+        () => (typeof method !== 'undefined' && method === 'gool') || typeof method === 'undefined',
+        [method]
+    );
+    const methodIsPsiphon = useMemo(
+        () => typeof method !== 'undefined' && method === 'psiphon',
+        [method]
+    );
+
+    const onCloseTestUrlModal = useCallback(() => {
+        setShowTestUrlModal(false);
+    }, []);
+
+    const onOpenTestUrlModal = useCallback(() => setShowTestUrlModal(true), []);
+
+    const onKeyDownTestUrl = useCallback(
+        (e: KeyboardEvent<HTMLDivElement>) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                onOpenTestUrlModal();
+            }
+        },
+        [onOpenTestUrlModal]
+    );
 
     const loading =
         typeof location === 'undefined' ||
         typeof license === 'undefined' ||
+        typeof testUrl === 'undefined' ||
         typeof method === 'undefined';
 
     return {
@@ -180,7 +210,14 @@ const useSettings = () => {
         onKeyDownGool,
         onEnablePsiphon,
         onKeyDownPsiphon,
-        onChangeLocation
+        onChangeLocation,
+        proxyMode,
+        testUrl,
+        setTestUrl,
+        onCloseTestUrlModal,
+        onKeyDownTestUrl,
+        onOpenTestUrlModal,
+        showTestUrlModal
     };
 };
 

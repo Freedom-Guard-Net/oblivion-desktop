@@ -9,7 +9,9 @@ const indonesia: Language = {
         disconnecting: 'Memutuskan ...',
         disconnected: 'Terputus',
         ip_check: 'Mengecek IP ...',
-        keep_trying: 'Silakan tunggu sebentar untuk mencoba lagi...'
+        keep_trying: 'Silakan tunggu sebentar untuk mencoba lagi...',
+        preparing_rulesets: 'Sedang menyiapkan set aturan...',
+        downloading_rulesets_failed: 'Gagal mengunduh set aturan.'
     },
     home: {
         title_warp_based: 'Berbasis Warp',
@@ -23,7 +25,8 @@ const indonesia: Language = {
         drawer_update_label: 'Pembaruan Baru',
         drawer_speed_test: 'Uji kecepatan',
         drawer_about: 'Tentang Aplikasi',
-        drawer_lang: 'Ganti Bahasa'
+        drawer_lang: 'Ganti Bahasa',
+        drawer_singbox: 'Pengaturan Terowongan'
     },
     toast: {
         ip_check_please_wait: 'Mohon tunggu beberapa detik untuk mencoba kembali pemeriksaan!',
@@ -34,7 +37,15 @@ const indonesia: Language = {
         cleared: 'Log telah dibersihkan!',
         please_wait: 'Mohon Tunggu ...',
         offline: 'Anda sedang offline!',
-        settings_changed: 'Menerapkan pengaturan memerlukan penyambungan ulang.'
+        settings_changed: 'Menerapkan pengaturan memerlukan penyambungan ulang.',
+        hardware_usage:
+            'Mengaktifkan opsi ini akan meningkatkan penggunaan sumber daya perangkat keras.',
+        config_added:
+            'Konfigurasi telah berhasil ditambahkan, dan untuk menggunakannya, Anda harus mengklik koneksi.',
+        profile_added: 'Titik akhir telah berhasil ditambahkan ke profil.',
+        endpoint_added: 'Endpoint berhasil diganti.',
+        new_update:
+            'Versi baru aplikasi tersedia. Apakah Anda ingin mengunduh dan menyiapkannya untuk instalasi?'
     },
     settings: {
         title: 'Pengaturan Warp',
@@ -46,7 +57,7 @@ const indonesia: Language = {
         method_psiphon: 'Psiphon',
         method_psiphon_desc: 'Aktifkan Psiphon',
         method_psiphon_location: 'Negara',
-        method_psiphon_location_auto: 'Otomatis',
+        method_psiphon_location_auto: 'acak',
         method_psiphon_location_desc: 'Pilih IP negara yang diinginkan',
         endpoint: 'Titik Akhir',
         endpoint_desc: 'Kombinasi IP atau nama domain, bersama dengan port',
@@ -58,7 +69,7 @@ const indonesia: Language = {
         proxy_mode_desc: 'Menentukan Pengaturan Proxy',
         port: 'Port Proxy',
         port_desc: 'Tentukan port proxy aplikasi',
-        share_vpn: 'Berbagi (LAN)',
+        share_vpn: 'Alamat ikat',
         share_vpn_desc: 'Bagikan proxy di jaringan',
         dns: 'DNS',
         dns_desc: 'Blokir iklan & konten dewasa',
@@ -81,6 +92,8 @@ const indonesia: Language = {
         force_close_desc: 'Jangan berada di baki sistem saat keluar',
         shortcut: 'Navigator',
         shortcut_desc: 'Pintasan di halaman beranda',
+        sound_effect: 'efek suara',
+        sound_effect_desc: 'memutar suara saat koneksi berhasil',
         restore: 'Pulihkan',
         restore_desc: 'Menerapkan pengaturan bawaan aplikasi',
         scanner: 'Pengaturan Pemindai',
@@ -98,14 +111,42 @@ const indonesia: Language = {
         routing_rules_disabled: 'Dimatikan',
         routing_rules_items: 'Item',
         profile: 'Profil',
-        profile_desc: 'Titik akhir yang disimpan oleh Anda'
+        profile_desc: 'Titik akhir yang disimpan oleh Anda',
+        singbox: 'Pengaturan Singbox',
+        close_singbox: 'Hentikan operasi',
+        close_singbox_desc: 'Otomatis tutup sing-box saat terputus',
+        close_helper: 'Hentikan pembantu',
+        close_helper_desc: 'Tutup otomatis pembantu saat keluar',
+        mtu: 'Nilai MTU',
+        mtu_desc: 'Atur Maximum Transmission Unit',
+        geo_block: 'Pemblokiran',
+        geo_block_desc: 'Iklan, Malware, Phishing, dan Penambang Kripto',
+        geo_rules_ip: 'Routing IP',
+        geo_rules_ip_desc: 'Menerapkan aturan GeoIP',
+        geo_rules_site: 'Routing Web',
+        geo_rules_site_desc: 'Menerapkan aturan GeoSite',
+        geo_nsfw_block: 'Penyaring Konten',
+        geo_nsfw_block_desc: 'Blokir situs web NSFW',
+        more_helper: 'Pengaturan Asisten',
+        singbox_log: 'Pencatatan',
+        singbox_log_desc: 'Atur Tingkat Pencatatan',
+        singbox_stack: 'Tumpukan',
+        singbox_stack_desc: 'Atur Jenis Tumpukan',
+        singbox_sniff: 'Penyadapan',
+        singbox_sniff_desc: 'Aktifkan Sniffing & Override Tujuan',
+        singbox_addressing: 'Pengalamatan',
+        singbox_addressing_desc: 'Atur Jenis Alamat Antarmuka',
+        more_duties: 'Tugas lebih',
+        beta_release: 'Pembaruan Beta',
+        beta_release_desc: 'Tetap terinformasi tentang versi pra-rilis'
     },
     tabs: {
         home: 'Hubungkan',
         warp: 'Warp',
         network: 'Network',
         scanner: 'Scanner',
-        app: 'App'
+        app: 'App',
+        singbox: 'Singbox'
     },
     modal: {
         endpoint_title: 'Endpoint',
@@ -113,11 +154,18 @@ const indonesia: Language = {
         license_desc:
             'Program ini tidak memerlukan lisensi Warp untuk menjalankannya, tetapi jika Anda mau, Anda bisa memasukkan lisensi Anda di sini.',
         license_clear: 'Hapus',
+        test_url_title: 'URL Uji',
+        test_url_desc: 'Alamat uji konektivitas',
+        test_url_update: 'Menerima saran',
         port_title: 'Port Proxy',
         restore_title: 'Pulihkan Perubahan',
         restore_desc:
             'Dengan mengonfirmasi operasi pemulihan perubahan, semua pengaturan program akan kembali ke kondisi bawaan dan koneksi Anda akan terputus.',
         routing_rules_sample: 'Sampel',
+        routing_rules_alert_tun:
+            'Hanya aturan perutean untuk domain, ip, dan aplikasi yang akan mempengaruhi konfigurasi Tun.',
+        routing_rules_alert_system:
+            'Kecuali aturan perutean aplikasi, aturan lainnya akan mempengaruhi konfigurasi Proxy Sistem.',
         endpoint_default: 'Bawaan',
         endpoint_suggested: 'Disarankan',
         endpoint_latest: 'Terkini',
@@ -127,6 +175,9 @@ const indonesia: Language = {
         profile_name: 'Judul',
         profile_endpoint: 'Titik Akhir',
         profile_limitation: (value) => `Anda dapat menambahkan maksimal ${value} titik akhir.`,
+        mtu_title: 'Nilai MTU',
+        mtu_desc:
+            'Maximum Transmission Unit (MTU) mengacu pada ukuran maksimum paket data, yang harus diatur antara 1000 hingga 9999.',
         confirm: 'Saya mengerti',
         update: 'Perbarui',
         cancel: 'Batalkan'
@@ -143,6 +194,7 @@ const indonesia: Language = {
         error_object_null: 'Program mengalami kesalahan; Coba lagi.',
         error_port_already_in_use: (value) => `Port ${value} sedang digunakan program lain.`,
         error_port_socket: 'Gunakan port lain.',
+        error_port_restart: 'Port sedang digunakan; memulai ulang ...',
         error_unknown_flag: 'Perintah yang tidak valid dieksekusi di latar belakang.',
         error_deadline_exceeded: 'Waktu koneksi habis; Coba Lagi.',
         error_configuration_encountered: 'Konfigurasi proxy mengalami kesalahan!',
@@ -151,9 +203,17 @@ const indonesia: Language = {
             'Konfigurasi proxy tidak didukung pada sistem operasi Anda, tetapi Anda dapat menggunakan Warp Proxy secara manual.',
         error_configuring_proxy: (value) => `Kesalahan mengkonfigurasi proxy untuk ${value}!`,
         error_wp_not_found: 'File warp-plus tidak terletak di samping paket aplikasi!',
+        error_wp_exclusions:
+            'Kemungkinan file warp-plus telah dikarantina karena pemberitahuan positif palsu dan deteksi yang salah oleh antivirus, yang menyebabkan masalah dengan kemampuan program untuk mengakses internet secara bebas.\nProgram dapat menambahkan file tersebut ke daftar pengecualian di beberapa antivirus jika izin akses diberikan. Haruskah ini dilakukan?',
         error_wp_stopped: 'File warp-plus mengalami masalah saat dijalankan!',
         error_connection_failed: 'Koneksi ke 1.1.1.1 tidak berhasil.',
-        error_country_failed: 'Tidak dapat terhubung ke negara yang dipilih.'
+        error_country_failed: 'Tidak dapat terhubung ke negara yang dipilih.',
+        error_singbox_failed_stop: 'Gagal menghentikan Sing-Box!',
+        error_singbox_failed_start: 'Gagal memulai Sing-Box!',
+        error_wp_reset_peer: 'Koneksi ke Cloudflare terputus secara tak terduga!',
+        error_failed_connection: 'Gagal menjalin koneksi!',
+        error_canceled_by_user: 'Operasi dibatalkan oleh pengguna.',
+        error_helper_not_found: 'File pembantu tidak ditemukan di sebelah paket aplikasi!'
     },
     about: {
         title: 'Tentang Aplikasi',

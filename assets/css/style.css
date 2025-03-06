@@ -92,6 +92,17 @@ nav.header i:hover {
     color: #eaeaea;
 }
 
+nav.header i.navPaste {
+    float: left;
+    margin: 2px 0 0 15px;
+    font-size: 26px !important;
+}
+
+[dir='ltr'] nav.header i.navPaste {
+    float: right;
+    margin: 2px 15px 0 0;
+}
+
 nav.header i.log {
     color: #a1a1a1;
     margin: 0 0 0 15px;
@@ -128,13 +139,13 @@ nav.header h3 {
     font-size: 19px;
     font-weight: 200;
     color: #303030;
-    margin: 4px 5px 0 0;
+    margin: 4px 0 0 0;
     float: right;
 }
 
 [dir='ltr'] nav.header h3 {
     float: left;
-    margin: 4px 0 0 5px;
+    margin: 4px 0 0 0;
 }
 
 [data-bs-theme='dark'] nav.header h3 {
@@ -144,11 +155,14 @@ nav.header h3 {
 nav.header i.backBtn {
     font-size: 30px;
     float: left;
+    margin-left: -5px;
 }
 
 [dir='ltr'] nav.header i.backBtn {
     float: right;
     rotate: 180deg;
+    margin-left: 0;
+    margin-right: -5px;
 }
 
 nav.header i.backBtn:hover {
@@ -491,7 +505,7 @@ nav.header .navMenu .indicator {
 .homeScreen .inFoot {
     position: fixed;
     bottom: -90px;
-    min-width: 30%;
+    min-width: 200px;
     max-width: 80%;
     background: #f1f1f1;
     border-radius: 15px 15px 0 0;
@@ -500,16 +514,13 @@ nav.header .navMenu .indicator {
     text-align: center;
     transition: all 0.5s ease-in-out;
     opacity: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 300px;
 }
 
 .homeScreen .inFoot.withIp {
-    right: 20%;
-    left: 20%;
-    width: 60%;
+    min-width: 230px;
 }
 
 .homeScreen .inFoot.active {
@@ -572,10 +583,10 @@ html[data-bs-theme='dark'] .homeScreen .inFoot .item img[alt='xx Flag'] {
 
 @keyframes placeHolderShimmer {
     0% {
-        background-position: 468px 0;
+        background-position: -468px 0;
     }
     100% {
-        background-position: -468px 0;
+        background-position: 468px 0;
     }
 }
 
@@ -809,7 +820,7 @@ html[data-bs-theme='dark'] .shimmer {
     width: 100%;
     border-bottom: 1px solid #dcdcdc;
     transition: all 0.2s ease-in-out;
-    padding: 14px 20px 15px 20px;
+    padding: 14px 0 15px 0;
 }
 
 [data-bs-theme='dark'] .settings .item,
@@ -1063,7 +1074,7 @@ html[data-bs-theme='dark'] .shimmer {
 .moreSettings {
     float: right;
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
     margin: 30px 0 20px 0;
     font-size: 15px;
     opacity: 0.5;
@@ -1092,12 +1103,16 @@ html[data-bs-theme='dark'] .shimmer {
 .appToast {
     float: right;
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     margin-bottom: 10px;
+}
+.appToast.inModal {
+    margin: 10px 0 0 0;
+    padding: 0;
 }
 
 .appToast div {
@@ -1159,16 +1174,21 @@ html[data-bs-theme='dark'] .shimmer {
 
 .splashScreen .splashScreenImg {
     background: transparent url('../img/splashScreen/light.png') no-repeat center center;
-    background-size: 85%;
+    background-size: 100%;
     width: 100%;
     height: 100vh;
     z-index: 4;
     position: absolute;
 }
+@media (min-width: 400px) {
+    .splashScreen .splashScreenImg {
+        background-size: 400px;
+    }
+}
+
 html:not([lang='fa']) .splashScreen .splashScreenImg {
     background-image: url('../img/splashScreen/light-en.png');
 }
-
 [data-bs-theme='dark'] .splashScreen .splashScreenImg {
     background-image: url('../img/splashScreen/dark.png');
 }
@@ -1181,22 +1201,42 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     justify-content: center;
     align-items: center;
     position: absolute;
-    bottom: 20px;
+    bottom: 35px;
     float: right;
     width: 100%;
 }
 
-.splashScreen .loading .spinner {
-    animation: spinner 0.8s linear infinite;
-    border: 2px solid #ffa200;
-    border-right-color: transparent;
-    border-radius: 100%;
-    display: inline-block;
-    overflow: hidden;
-    text-indent: -9999px;
-    vertical-align: middle;
-    width: 18px;
-    height: 18px;
+.splashScreen .loading svg path:nth-child(1) {
+    stroke-dasharray: 2.42777px, 242.77666px;
+    stroke-dashoffset: 0;
+    -webkit-animation: anim 1.6s linear infinite;
+    animation: anim 1.6s linear infinite;
+    stroke: #727272;
+}
+.splashScreen .loading svg path:nth-child(2) {
+    stroke: #000;
+    opacity: 0.1;
+}
+[data-bs-theme='dark'] .splashScreen .loading svg path:nth-child(1) {
+    stroke: #fff;
+}
+[data-bs-theme='dark'] .splashScreen .loading svg path:nth-child(2) {
+    stroke: #ededed;
+    opacity: 0.1;
+}
+@keyframes anim {
+    12.5% {
+        stroke-dasharray: 33.98873px, 242.77666px;
+        stroke-dashoffset: -26.70543px;
+    }
+    43.75% {
+        stroke-dasharray: 84.97183px, 242.77666px;
+        stroke-dashoffset: -84.97183px;
+    }
+    100% {
+        stroke-dasharray: 2.42777px, 242.77666px;
+        stroke-dashoffset: -240.34889px;
+    }
 }
 
 .socialMedia {
@@ -1333,6 +1373,12 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     border-radius: 25px 25px 0 0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.16);
     padding: 10px 10px 15px 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 385px;
+}
+.dialog .dialogBox .container {
+    width: 100%;
 }
 
 [data-bs-theme='dark'] .dialog .dialogBox {
@@ -1527,6 +1573,9 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     float: left;
     width: 162px;
     overflow: hidden;
+}
+.dialog .dialogBox .labels .label .dropDownInLabel.splitter[data-list='1'] {
+    width: 80px;
 }
 .dialog .dialogBox .labels .label .dropDownInLabel.splitter[data-list='3'] {
     width: 240px;
@@ -1729,18 +1778,45 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     color: #dadada;
 }
 
-.dialog .dialogBox .updater {
+.dialog .dialogBox .btn.btn-update {
+    border-color: #acacac;
+    margin-left: 10px;
+    font-weight: 300;
     float: right;
-    margin: 21px 1px 0 1px;
+}
+
+[dir='ltr'] .dialog .dialogBox .btn.btn-update {
+    margin-left: 0;
+    margin-right: 10px;
+    float: left;
+}
+
+[data-bs-theme='dark'] .dialog .dialogBox .btn.btn-update {
+    border-color: #303666;
+}
+
+.dialog .dialogBox .btn.btn-update:hover {
+    border-color: #979797;
+}
+
+[data-bs-theme='dark'] .dialog .dialogBox .btn.btn-update:hover {
+    border-color: #464d8b;
+    color: #dadada;
+}
+
+.dialog .dialogBox .btn.btn-update i {
+    float: right;
+    margin: 0 1px 0 1px;
     transition: all 0.2s ease-in-out;
     opacity: 0.5;
     user-select: none;
     cursor: pointer;
+    line-height: 20px;
 }
-[dir='ltr'] .dialog .dialogBox .updater {
+[dir='ltr'] .dialog .dialogBox .btn.btn-update i {
     float: left;
 }
-.dialog .dialogBox .updater:hover {
+.dialog .dialogBox .btn.btn-update i:hover {
     opacity: 0.8;
 }
 
@@ -1777,6 +1853,8 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
 .drawer {
     padding: 15px 0;
     margin: 0;
+    max-width: 310px;
+    user-select: none;
 }
 
 [data-bs-theme='dark'] .drawer {
@@ -1787,6 +1865,30 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     backdrop-filter: blur(4px);
     --webkit-backdrop-filter: blur(4px);
     background-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+@media (min-width: 1050px) {
+    .navMenu,
+    .tabs.inHome,
+    .drawerOverlay {
+        display: none !important;
+    }
+    .EZDrawer .EZDrawer__container {
+        background: transparent !important;
+        box-shadow: none !important;
+        border-left: 1px solid #f3f3f3;
+    }
+    [data-bs-theme='dark'] .EZDrawer .EZDrawer__container {
+        border-left: 1px solid #2b2e3b;
+    }
+    [dir='ltr'] .EZDrawer .EZDrawer__container {
+        border-left: none;
+        border-right: 1px solid #f3f3f3;
+    }
+    [dir='ltr'][data-bs-theme='dark'] .EZDrawer .EZDrawer__container {
+        border-left: none;
+        border-right: 1px solid #2b2e3b;
+    }
 }
 
 [data-bs-theme='dark'] .drawerOverlay {
@@ -1977,15 +2079,16 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
 .tabs {
     position: fixed;
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 385px;
     margin: 0;
     z-index: 2;
     padding: 1px 0;
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(5px);
-    --webkit-backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     user-select: none;
 }
 
@@ -2000,11 +2103,20 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.02);
 }
 
+@media (min-width: 400px) {
+    .tabs.inSettings,
+    [data-bs-theme='dark'] .tabs.inSettings {
+        box-shadow: none;
+    }
+}
+
 .tabs ul {
     float: right;
     width: 100%;
     margin: 0;
     padding: 0;
+    transition: all 0.2s ease-in-out;
+    max-height: 61px;
 }
 
 .tabs ul li {
@@ -2012,6 +2124,9 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     width: 20%;
     list-style: none;
     margin: 0;
+}
+.tabs.withSingbox ul li {
+    width: 16.66%;
 }
 
 [dir='ltr'] .tabs ul li {
@@ -2029,6 +2144,9 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     color: #898989;
     text-align: center;
     line-height: 17px;
+}
+.tabs.withSingbox ul li a {
+    padding: 15px 10px;
 }
 
 [data-bs-theme='dark'] .tabs ul li a {
@@ -2050,6 +2168,11 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    transition: all 0.2s ease-in-out;
+}
+.tabs.withSingbox ul li a span {
+    opacity: 0;
+    height: 0;
 }
 
 .tabs ul li a i {
@@ -2057,6 +2180,7 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
     padding: 2px 10px;
     border-radius: 25px;
     color: #c0c0c0;
+    transition: all 0.2s ease-in-out;
 }
 
 [data-bs-theme='dark'] .tabs ul li a i {
@@ -2260,4 +2384,23 @@ html:not([lang='fa'])[data-bs-theme='dark'] .splashScreen .splashScreenImg {
 
 .speedTest .results .resultCard h2 small {
     font-size: 14px;
+}
+
+.progressBar {
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.progressBar div {
+    height: 3px;
+    transition: width 0.3s ease-in-out;
+    float: left;
+}
+.progressBar.green div {
+    background: #4caf50;
+}
+.progressBar.red div {
+    background: tomato;
 }

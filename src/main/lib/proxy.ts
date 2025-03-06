@@ -11,8 +11,7 @@ import { createPacScript, killPacScriptServer, servePacScript } from './pacScrip
 import { getTranslate } from '../../localization';
 
 const execPromise = promisify(exec);
-
-const { spawn } = require('child_process');
+import { spawn } from 'child_process';
 
 let oldProxyHost = '';
 let oldProxyPort = '';
@@ -22,6 +21,7 @@ const setRoutingRules = (value: any) => {
         'localhost,127.*,10.*,172.16.*,172.17.*,172.18.*,172.19.*,172.20.*,172.21.*,172.22.*,172.23.*,172.24.*,172.25.*,172.26.*,172.27.*,172.28.*,172.29.*,172.30.*,172.31.*,192.168.*,<local>';
     if (typeof value === 'string' && value !== '') {
         const myRules = value
+            .replace(/app:[^,]+/g, '')
             .replace(/domain:/g, '')
             .replace(/geoip:/g, '')
             .replace(/ip:/g, '')
@@ -40,7 +40,6 @@ const setRoutingRules = (value: any) => {
 // tweaking windows proxy settings using regedit
 const windowsProxySettings = (args: RegistryPutItem, regeditVbsDirPath: string) => {
     regeditModule.setExternalVBSLocation(regeditVbsDirPath);
-
     return regedit.putValue({
         'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings': {
             ...args
@@ -97,12 +96,12 @@ const enableGnomeProxy = async (ip: string, port: string, routingRules: any): Pr
 
     exec(`gsettings get org.gnome.system.proxy.socks host`, (err, stdout) => {
         oldProxyHost = stdout;
-        log.info(`Gnome old proxy host : ` + stdout);
+        //log.info(`Gnome old proxy host : ` + stdout);
     });
 
     exec(`gsettings get org.gnome.system.proxy.socks port`, (err, stdout) => {
         oldProxyPort = stdout;
-        log.info(`Gnome old proxy port : ` + stdout);
+        //log.info(`Gnome old proxy port : ` + stdout);
     });
 
     try {
@@ -369,7 +368,6 @@ export const enableProxy = async (regeditVbsDirPath: string, ipcEvent?: IpcMainE
                     pacServeUrl = await servePacScript(Number(port) + 1);
                     log.info('pacServeUrl:', pacServeUrl);
                 }
-
                 await windowsProxySettings(
                     {
                         ProxyServer: {
@@ -392,7 +390,6 @@ export const enableProxy = async (regeditVbsDirPath: string, ipcEvent?: IpcMainE
                     regeditVbsDirPath
                 );
                 log.info('system proxy has been set.');
-
                 resolve();
             } catch (error) {
                 log.error(`error while trying to set system proxy: , ${error}`);
@@ -512,15 +509,21 @@ export const disableProxy = async (regeditVbsDirPath: string, ipcEvent?: IpcMain
             if (method === 'psiphon') {
                 killPacScriptServer();
             }
-
             try {
                 await windowsProxySettings(
                     {
+                        ProxyServer: {
+                            type: 'REG_SZ',
+                            value: ''
+                        },
+                        ProxyOverride: {
+                            type: 'REG_SZ',
+                            value: ''
+                        },
                         AutoConfigURL: {
                             type: 'REG_SZ',
                             value: ''
                         },
-                        // disable use script setup?
                         ProxyEnable: {
                             type: 'REG_DWORD',
                             value: 0

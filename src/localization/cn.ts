@@ -9,7 +9,9 @@ const chinese: Language = {
         disconnecting: '断开连接中...',
         disconnected: '已断开连接',
         ip_check: '检查 IP 中...',
-        keep_trying: '请稍等片刻，再次尝试...'
+        keep_trying: '请稍等片刻，再次尝试...',
+        preparing_rulesets: '正在准备规则集...',
+        downloading_rulesets_failed: '下载规则集失败。'
     },
     home: {
         title_warp_based: '基于 Warp',
@@ -23,7 +25,8 @@ const chinese: Language = {
         drawer_update_label: '新版本',
         drawer_speed_test: '速度测试',
         drawer_about: '关于应用',
-        drawer_lang: '更改语言'
+        drawer_lang: '更改语言',
+        drawer_singbox: '隧道设置'
     },
     toast: {
         ip_check_please_wait: '请等待几秒钟后重试检查！',
@@ -34,7 +37,12 @@ const chinese: Language = {
         cleared: '日志已被清除！',
         please_wait: '请等待...',
         offline: '您处于离线状态！',
-        settings_changed: '应用设置已更改，需要重新连接。'
+        settings_changed: '应用设置已更改，需要重新连接。',
+        hardware_usage: '启用此选项会增加硬件资源的使用。',
+        config_added: '配置已成功添加，要使用它，您必须点击连接。',
+        profile_added: '端点已成功添加到个人资料中。',
+        endpoint_added: '终端已成功替换。',
+        new_update: '有新版本的应用可用。您想下载并准备安装吗？'
     },
     settings: {
         title: 'Warp 设置',
@@ -46,7 +54,7 @@ const chinese: Language = {
         method_psiphon: 'Psiphon',
         method_psiphon_desc: '启用 Psiphon',
         method_psiphon_location: '选择国家',
-        method_psiphon_location_auto: '自动',
+        method_psiphon_location_auto: '随机',
         method_psiphon_location_desc: '选择所需的国家 IP 地址',
         endpoint: '端点',
         endpoint_desc: 'IP 或域名与端口的组合',
@@ -58,7 +66,7 @@ const chinese: Language = {
         proxy_mode_desc: '选择代理模式',
         port: '代理端口',
         port_desc: '定义应用的代理端口',
-        share_vpn: '允许局域网连接',
+        share_vpn: '绑定地址',
         share_vpn_desc: '在局域网上共享代理',
         dns: 'DNS',
         dns_desc: '屏蔽广告和成人内容',
@@ -81,6 +89,8 @@ const chinese: Language = {
         force_close_desc: '退出时不要停留在系统托盘中',
         shortcut: '导航器',
         shortcut_desc: '主页上的快捷方式',
+        sound_effect: '声音效果',
+        sound_effect_desc: '成功连接时播放声音',
         restore: '恢复默认设置',
         restore_desc: '将应用设置还原为默认值',
         scanner: '扫描仪设置',
@@ -98,14 +108,42 @@ const chinese: Language = {
         routing_rules_disabled: '已禁用',
         routing_rules_items: '项目',
         profile: '个人资料',
-        profile_desc: '您保存的端点'
+        profile_desc: '您保存的端点',
+        singbox: 'Singbox 设置',
+        close_singbox: '停止操作',
+        close_singbox_desc: '断开连接时自动关闭 sing-box',
+        close_helper: '停止助手',
+        close_helper_desc: '退出时自动关闭助手',
+        mtu: 'MTU 值',
+        mtu_desc: '设置最大传输单元',
+        geo_block: '阻止',
+        geo_block_desc: '广告、恶意软件、网络钓鱼和加密货币矿工',
+        geo_rules_ip: 'IP 路由',
+        geo_rules_ip_desc: '应用 GeoIP 规则',
+        geo_rules_site: '网页路由',
+        geo_rules_site_desc: '应用 GeoSite 规则',
+        geo_nsfw_block: '内容过滤',
+        geo_nsfw_block_desc: '屏蔽 NSFW 网站',
+        more_helper: '助理设置',
+        singbox_log: '日志记录',
+        singbox_log_desc: '设置日志级别',
+        singbox_stack: '堆栈',
+        singbox_stack_desc: '设置堆栈类型',
+        singbox_sniff: '嗅探',
+        singbox_sniff_desc: '启用嗅探并覆盖目标',
+        singbox_addressing: '寻址',
+        singbox_addressing_desc: '设置接口地址类型',
+        more_duties: '更多职责',
+        beta_release: 'Beta 更新',
+        beta_release_desc: '了解预发布版本'
     },
     tabs: {
         home: '连接',
         warp: 'Warp',
         network: '网络',
         scanner: '扫描仪',
-        app: '应用'
+        app: '应用',
+        singbox: 'Singbox'
     },
     modal: {
         endpoint_title: '端点',
@@ -113,10 +151,15 @@ const chinese: Language = {
         license_desc:
             '应用不一定需要 Warp 许可证才能运行，但如果您愿意，可以在此处输入您的许可证。',
         license_clear: '清除',
+        test_url_title: '测试 URL',
+        test_url_desc: '连接测试地址',
+        test_url_update: '接收建议',
         port_title: '代理端口',
         restore_title: '恢复更改',
         restore_desc: '确认恢复默认设置后，所有应用设置将恢复为默认值，并且您的连接将断开。',
         routing_rules_sample: '示例',
+        routing_rules_alert_tun: '只有域名、ip和应用的路由规则会影响Tun配置。',
+        routing_rules_alert_system: '除了应用路由规则，其他规则将影响系统代理配置。',
         endpoint_default: '默认',
         endpoint_suggested: '建议',
         endpoint_latest: '最新的',
@@ -126,6 +169,8 @@ const chinese: Language = {
         profile_name: '标题',
         profile_endpoint: '端点',
         profile_limitation: (value) => `您最多可以添加 ${value} 个端点。`,
+        mtu_title: 'MTU 值',
+        mtu_desc: '最大传输单元 (MTU) 是指数据包的最大大小，应设置在 1000 到 9999 之间。',
         confirm: '确认',
         update: '更新',
         cancel: '取消'
@@ -142,6 +187,7 @@ const chinese: Language = {
         error_object_null: '程序遇到错误；再试一次。',
         error_port_already_in_use: (value) => `端口 ${value} 正在被另一个程序使用；更改。`,
         error_port_socket: '使用另一个端口。',
+        error_port_restart: '端口正在使用中；正在重新启动...',
         error_unknown_flag: '后台执行了无效命令。',
         error_deadline_exceeded: '连接超时；再试一次。',
         error_configuration_encountered: '代理配置遇到错误！',
@@ -150,9 +196,17 @@ const chinese: Language = {
             '您的操作系统不支持代理配置，但您可以手动使用 Warp 代理。',
         error_configuring_proxy: (value) => `为 ${value} 配置代理时出错！`,
         error_wp_not_found: 'warp-plus 文件不在应用程序包旁边。',
+        error_wp_exclusions:
+            '很可能由于误报和杀毒软件错误检测，warp-plus 文件被隔离，导致程序无法正常访问互联网。\n如果授权访问，程序可以将该文件添加到某些杀毒软件的排除列表中。是否执行此操作？',
         error_wp_stopped: 'warp-plus 文件在运行时遇到了问题！',
         error_connection_failed: '无法连接到1.1.1.1。',
-        error_country_failed: '无法连接到所选国家.'
+        error_country_failed: '无法连接到所选国家.',
+        error_singbox_failed_stop: '停止 Sing-Box 失败!',
+        error_singbox_failed_start: '启动 Sing-Box 失败!',
+        error_wp_reset_peer: '与 Cloudflare 的连接意外中断！',
+        error_failed_connection: '无法建立连接！',
+        error_canceled_by_user: '操作已被用户取消。',
+        error_helper_not_found: '未在应用程序包旁找到助手文件！'
     },
     about: {
         title: '关于应用',

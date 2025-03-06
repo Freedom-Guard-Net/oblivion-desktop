@@ -12,6 +12,8 @@ interface LandingDrawerProps {
     hasNewUpdate: boolean;
     toggleDrawer: () => void;
     appVersion: string;
+    proxyMode: string;
+    betaRelease: boolean;
 }
 
 const LandingDrawer: FC<LandingDrawerProps> = ({
@@ -20,7 +22,9 @@ const LandingDrawer: FC<LandingDrawerProps> = ({
     hasNewUpdate,
     lang,
     toggleDrawer,
-    appVersion
+    appVersion,
+    proxyMode,
+    betaRelease
 }) => {
     return (
         <Drawer
@@ -61,6 +65,16 @@ const LandingDrawer: FC<LandingDrawerProps> = ({
                             <span>{appLang?.home?.drawer_settings_network}</span>
                         </Link>
                     </li>
+                    {proxyMode === 'tun' && (
+                        <>
+                            <li role='presentation'>
+                                <Link to={'/singBox'} role='menuitem'>
+                                    <i className={'material-icons'}>&#xea25;</i>
+                                    <span>{appLang?.home?.drawer_singbox}</span>
+                                </Link>
+                            </li>
+                        </>
+                    )}
                     <li role='presentation'>
                         <Link to={'/scanner'} role='menuitem'>
                             <i className={'material-icons'}>&#xe2db;</i>
@@ -76,7 +90,7 @@ const LandingDrawer: FC<LandingDrawerProps> = ({
                     <li className='divider' />
                     <li className={hasNewUpdate ? '' : 'hidden'} role='presentation'>
                         <a
-                            href='https://github.com/bepass-org/oblivion-desktop/releases/latest#download'
+                            href={`https://github.com/bepass-org/oblivion-desktop/releases${betaRelease ? '' : '/latest'}#download`}
                             target='_blank'
                             rel='noreferrer'
                             role='menuitem'
@@ -98,12 +112,12 @@ const LandingDrawer: FC<LandingDrawerProps> = ({
                             <span>{appLang?.home?.drawer_lang}</span>
                         </a>
                     </li>*/}
-                    {/* <li role='presentation'>
+                    <li role='presentation'>
                         <Link to='/speed' role='menuitem'>
-                            <i className={'material-icons'}>speed</i>
+                            <i className={'material-icons'}>&#xe9e4;</i>
                             <span>{appLang?.speedTest?.title}</span>
                         </Link>
-                    </li> */}
+                    </li>
                     <li role='presentation'>
                         <Link to='/about' role='menuitem'>
                             <i className={'material-icons'}>&#xe88e;</i>

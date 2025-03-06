@@ -8,6 +8,8 @@ export interface Status {
     disconnected: string;
     ip_check: string;
     keep_trying: string;
+    preparing_rulesets: string;
+    downloading_rulesets_failed: string;
 }
 
 export interface Home {
@@ -23,6 +25,7 @@ export interface Home {
     drawer_speed_test: string;
     drawer_about: string;
     drawer_lang: string;
+    drawer_singbox: string;
 }
 
 export interface Toast {
@@ -34,6 +37,11 @@ export interface Toast {
     please_wait: string;
     offline: string;
     settings_changed: string;
+    hardware_usage: string;
+    config_added: string;
+    profile_added: string;
+    endpoint_added: string;
+    new_update: string;
 }
 
 export interface Settings {
@@ -81,6 +89,8 @@ export interface Settings {
     force_close_desc: string;
     shortcut: string;
     shortcut_desc: string;
+    sound_effect: string;
+    sound_effect_desc: string;
     restore: string;
     restore_desc: string;
     scanner: string;
@@ -99,6 +109,33 @@ export interface Settings {
     routing_rules_items: string;
     profile: string;
     profile_desc: string;
+    singbox: string;
+    close_singbox: string;
+    close_singbox_desc: string;
+    close_helper: string;
+    close_helper_desc: string;
+    mtu: string;
+    mtu_desc: string;
+    geo_block: string;
+    geo_block_desc: string;
+    geo_rules_ip: string;
+    geo_rules_ip_desc: string;
+    geo_rules_site: string;
+    geo_rules_site_desc: string;
+    geo_nsfw_block: string;
+    geo_nsfw_block_desc: string;
+    more_helper: string;
+    singbox_log: string;
+    singbox_log_desc: string;
+    singbox_stack: string;
+    singbox_stack_desc: string;
+    singbox_sniff: string;
+    singbox_sniff_desc: string;
+    singbox_addressing: string;
+    singbox_addressing_desc: string;
+    more_duties: string;
+    beta_release: string;
+    beta_release_desc: string;
 }
 
 export interface Tabs {
@@ -107,6 +144,7 @@ export interface Tabs {
     network: string;
     scanner: string;
     app: string;
+    singbox: string;
 }
 
 export interface Modal {
@@ -114,10 +152,15 @@ export interface Modal {
     license_title: string;
     license_desc: string;
     license_clear: string;
+    test_url_title: string;
+    test_url_desc: string;
+    test_url_update: string;
     port_title: string;
     restore_title: string;
     restore_desc: string;
     routing_rules_sample: string;
+    routing_rules_alert_system: string;
+    routing_rules_alert_tun: string;
     endpoint_default: string;
     endpoint_suggested: string;
     endpoint_latest: string;
@@ -127,6 +170,8 @@ export interface Modal {
     profile_name: string;
     profile_endpoint: string;
     profile_limitation: (value: string) => string;
+    mtu_title: string;
+    mtu_desc: string;
     confirm: string;
     update: string;
     cancel: string;
@@ -144,6 +189,7 @@ export interface Log {
     error_object_null: string;
     error_port_already_in_use: (value: string) => string;
     error_port_socket: string;
+    error_port_restart: string;
     error_unknown_flag: string;
     error_country_failed: string;
     error_deadline_exceeded: string;
@@ -152,8 +198,15 @@ export interface Log {
     error_configuration_not_supported: string;
     error_configuring_proxy: (value: string) => string;
     error_wp_not_found: string;
+    error_wp_exclusions: string;
     error_wp_stopped: string;
     error_connection_failed: string;
+    error_singbox_failed_stop: string;
+    error_singbox_failed_start: string;
+    error_wp_reset_peer: string;
+    error_failed_connection: string;
+    error_canceled_by_user: string;
+    error_helper_not_found: string;
 }
 
 export interface About {

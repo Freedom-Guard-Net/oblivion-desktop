@@ -4,6 +4,7 @@ import useGoBackOnEscape from '../../hooks/useGoBackOnEscape';
 import { useStore } from '../../store';
 import { settings } from '../../lib/settings';
 import { toPersianNumber } from '../../lib/toPersianNumber';
+//import toast from 'react-hot-toast';
 import { settingsHaveChangedToast } from '../../lib/toasts';
 import { defaultSettings, dnsServers } from '../../../defaultSettings';
 import { ipcRenderer } from '../../lib/utils';
@@ -18,7 +19,6 @@ const useOptions = () => {
     // TODO rename to networkConfiguration
     const [proxyMode, setProxyMode] = useState<string>('');
     //const [autoSetProxy, setAutoSetProxy] = useState<undefined | boolean>();
-    const [shareVPN, setShareVPN] = useState<undefined | boolean>();
     const [port, setPort] = useState<number>();
     const [showPortModal, setShowPortModal] = useState<boolean>(false);
     const appLang = useTranslate();
@@ -28,58 +28,94 @@ const useOptions = () => {
     const [showRoutingRulesModal, setShowRoutingRulesModal] = useState<boolean>(false);
     const [method, setMethod] = useState<undefined | string>('');
     const [dataUsage, setDataUsage] = useState<boolean>();
-    const [localIp, setLocalIp] = useState('0.0.0.0');
+    const [networkList, setNetworkList] = useState<{ value: string; label: string }[]>([
+        { value: '127.0.0.1', label: '127.0.0.1' },
+        { value: '0.0.0.0', label: '0.0.0.0' }
+    ]);
+    const [hostIp, setHostIp] = useState<undefined | string>('');
+
     const navigate = useNavigate();
 
     const getLocalIP = async () => {
+        if (networkList.length > 2) return false;
         const ipRegex = /([0-9]{1,3}\.){3}[0-9]{1,3}/;
-        const pc = new RTCPeerConnection({
-            iceServers: []
-        });
-        pc.createDataChannel('');
-        pc.createOffer().then((offer) => pc.setLocalDescription(offer));
-        pc.onicecandidate = (ice) => {
-            if (ice && ice.candidate && ice.candidate.candidate) {
-                const ipMatch = ipRegex.exec(ice.candidate.candidate);
-                if (ipMatch) {
-                    setLocalIp(ipMatch[0]);
-                    pc.onicecandidate = null;
+        return new Promise((resolve, reject) => {
+            const pc = new RTCPeerConnection({
+                iceServers: []
+            });
+            pc.createDataChannel('');
+            pc.onicecandidate = (iceEvent) => {
+                if (iceEvent.candidate && iceEvent.candidate.candidate) {
+                    const candidate = iceEvent.candidate.candidate;
+                    if (candidate.includes('udp')) {
+                        const ipMatch = ipRegex.exec(iceEvent.candidate.candidate);
+                        if (ipMatch) {
+                            resolve(ipMatch[0]);
+                            pc.close();
+                        }
+                    }
                 }
-            }
-        };
+            };
+            pc.createOffer()
+                .then((offer) => pc.setLocalDescription(offer))
+                .catch((err) => {
+                    reject(`Error creating offer: ${err.message}`);
+                    pc.close();
+                });
+        });
     };
 
     useEffect(() => {
-        settings.get('ipData').then((value) => {
-            setIpData(typeof value === 'undefined' ? defaultSettings.ipData : value);
-        });
-        settings.get('port').then((value) => {
-            setPort(typeof value === 'undefined' ? defaultSettings.port : value);
-        });
-        /*settings.get('autoSetProxy').then((value) => {
-            setAutoSetProxy(typeof value === 'undefined' ? defaultSettings.autoSetProxy : value);
-        });*/
-        settings.get('proxyMode').then((value) => {
-            setProxyMode(typeof value === 'undefined' ? defaultSettings.proxyMode : value);
-        });
-        settings.get('shareVPN').then((value) => {
-            setShareVPN(typeof value === 'undefined' ? defaultSettings.shareVPN : value);
-        });
-        settings.get('dns').then((value) => {
-            setDns(typeof value === 'undefined' ? dnsServers[0].value : value);
-        });
-        settings.get('routingRules').then((value) => {
-            setRoutingRules(typeof value === 'undefined' ? defaultSettings.routingRules : value);
-        });
-        settings.get('lang').then((value) => {
-            setLang(typeof value === 'undefined' ? defaultSettings.lang : value);
-        });
-        settings.get('method').then((value) => {
-            setMethod(typeof value === 'undefined' ? defaultSettings.method : value);
-        });
-        settings.get('dataUsage').then((value) => {
-            setDataUsage(typeof value === 'undefined' ? defaultSettings.dataUsage : value);
-        });
+        settings
+            .getMultiple([
+                'ipData',
+                'port',
+                'proxyMode',
+                'dns',
+                'routingRules',
+                'lang',
+                'method',
+                'dataUsage',
+                'hostIP'
+            ])
+            .then((values) => {
+                setPort(typeof values.port === 'undefined' ? defaultSettings.port : values.port);
+                const checkProxy =
+                    typeof values.proxyMode === 'undefined'
+                        ? defaultSettings.proxyMode
+                        : values.proxyMode;
+                setProxyMode(checkProxy);
+                setIpData(
+                    typeof values.ipData === 'undefined' ? defaultSettings.ipData : values.ipData
+                );
+                setDataUsage(
+                    typeof values.dataUsage === 'undefined'
+                        ? defaultSettings.dataUsage
+                        : values.dataUsage
+                );
+                const checkHostIp =
+                    typeof values.hostIP === 'undefined' ? defaultSettings.hostIP : values.hostIP;
+                setHostIp(checkHostIp);
+                setDns(typeof values.dns === 'undefined' ? dnsServers[0].value : values.dns);
+                setRoutingRules(
+                    typeof values.routingRules === 'undefined'
+                        ? defaultSettings.routingRules
+                        : values.routingRules
+                );
+                setLang(typeof values.lang === 'undefined' ? defaultSettings.lang : values.lang);
+                setMethod(
+                    typeof values.method === 'undefined' ? defaultSettings.method : values.method
+                );
+                if (checkHostIp === networkList[1]?.value || checkProxy === 'none') {
+                    setIpData(false);
+                    settings.set('ipData', false);
+                    setDataUsage(false);
+                    settings.set('dataUsage', false);
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching settings:', error);
+            });
 
         ipcRenderer.on('tray-menu', (args: any) => {
             if (args.key === 'changePage') {
@@ -87,8 +123,28 @@ const useOptions = () => {
             }
         });
 
-        getLocalIP();
+        getLocalIP()
+            .then((ip: any) => {
+                if (ip && ip !== '') {
+                    const exists = networkList.some((network) => network.value === ip);
+                    if (!exists) {
+                        setNetworkList((prev) => [
+                            ...prev,
+                            { value: ip, label: ip, key: `network-${ip}` }
+                        ]);
+                    }
+                }
+            })
+            .catch((err) => console.log(err));
     }, []);
+
+    /*useEffect(() => {
+        if (dataUsage) {
+            defaultToast(`${appLang?.toast?.hardware_usage}`, 'DATA_USAGE');
+        } else {
+            toast.remove('DATA_USAGE');
+        }
+    }, [dataUsage]);*/
 
     const countRoutingRules = useCallback(
         (value: string) => {
@@ -124,6 +180,12 @@ const useOptions = () => {
                     settings.set('ipData', false);
                     setDataUsage(false);
                     settings.set('dataUsage', false);
+                } else if (event.target.value === 'tun') {
+                    //setHostIp(networkList[0].value);
+                    /*if (method === 'psiphon') {
+                        settings.set('method', 'gool');
+                        setMethod('gool');
+                    }*/
                 }
             }, 1000);
         },
@@ -150,6 +212,7 @@ const useOptions = () => {
         },
         [onClickPort]
     );
+
     const onClickRoutingRoles = useCallback(() => {
         if (proxyMode !== 'none') {
             setShowRoutingRulesModal(true);
@@ -166,38 +229,40 @@ const useOptions = () => {
         [onClickRoutingRoles]
     );
 
-    const handleShareVPNOnClick = useCallback(() => {
-        setShareVPN(!shareVPN);
-        settings.set('shareVPN', !shareVPN);
-        settingsHaveChangedToast({ ...{ isConnected, isLoading, appLang } });
-        setTimeout(function () {
-            settings.set('hostIP', !shareVPN ? localIp : '127.0.0.1');
-        }, 1000);
-    }, [isConnected, isLoading, shareVPN, appLang, localIp]);
-
-    const handleShareVPNOnKeyDown = useCallback(
-        (e: KeyboardEvent<HTMLDivElement>) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleShareVPNOnClick();
-            }
+    const onChangeLanMode = useCallback(
+        (event: ChangeEvent<HTMLSelectElement>) => {
+            setHostIp(event.target.value);
+            settings.set('hostIP', event.target.value);
+            settingsHaveChangedToast({ ...{ isConnected, isLoading, appLang } });
+            setTimeout(function () {
+                if (event.target.value === networkList[1]?.value) {
+                    setIpData(false);
+                    setDataUsage(false);
+                    settings.set('ipData', false);
+                    settings.set('dataUsage', false);
+                }
+            }, 1000);
         },
-        [handleShareVPNOnClick]
+        [isConnected, isLoading, appLang, ipData, hostIp]
     );
 
     const handleCheckIpDataOnClick = useCallback(() => {
-        if (proxyMode !== 'none') {
-            setIpData(!ipData);
-            settings.set('ipData', !ipData);
+        if (proxyMode === 'none') {
+            return;
         }
+        if (hostIp === networkList[1]?.value) {
+            return;
+        }
+        setIpData(!ipData);
+        settings.set('ipData', !ipData);
         setTimeout(function () {
             if (ipData) {
                 setDataUsage(false);
                 settings.set('dataUsage', false);
-                ipcRenderer.sendMessage('check-speed', false);
+                ipcRenderer.sendMessage('net-stats', false);
             }
         }, 1000);
-    }, [ipData, proxyMode]);
+    }, [ipData, proxyMode, hostIp]);
 
     const handleCheckIpDataOnKeyDown = useCallback(
         (e: KeyboardEvent<HTMLDivElement>) => {
@@ -214,7 +279,7 @@ const useOptions = () => {
             setDataUsage(!dataUsage);
             settings.set('dataUsage', !dataUsage);
         }
-        ipcRenderer.sendMessage('check-speed', isConnected && !dataUsage && ipData);
+        ipcRenderer.sendMessage('net-stats', isConnected && !dataUsage && ipData);
     }, [dataUsage, ipData, isConnected]);
 
     const handleDataUsageOnKeyDown = useCallback(
@@ -231,7 +296,6 @@ const useOptions = () => {
 
     return {
         proxyMode,
-        shareVPN,
         port,
         showPortModal,
         ipData,
@@ -252,12 +316,13 @@ const useOptions = () => {
         onKeyDownClickPort,
         onClickRoutingRoles,
         onKeyDownRoutingRoles,
-        handleShareVPNOnClick,
-        handleShareVPNOnKeyDown,
         handleCheckIpDataOnClick,
         handleCheckIpDataOnKeyDown,
         handleDataUsageOnClick,
-        handleDataUsageOnKeyDown
+        handleDataUsageOnKeyDown,
+        hostIp,
+        networkList,
+        onChangeLanMode
     };
 };
 export default useOptions;

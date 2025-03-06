@@ -34,13 +34,14 @@ const ProfileModal: FC<ProfileModalProps> = ({
         handleAddProfile,
         handleRemoveProfile,
         handleEditProfile,
-        checkValidEndpoint,
+        validEndpoint,
         handleOnClose,
         onSaveModal,
         onUpdateKeyDown,
         showModal,
         isEditing,
-        cancelEdit
+        cancelEdit,
+        sanitizeName
     } = useProfileModal({
         isOpen,
         onClose,
@@ -68,7 +69,7 @@ const ProfileModal: FC<ProfileModalProps> = ({
                             maxLength={10}
                             value={profileName}
                             onChange={(e) => {
-                                setProfileName(e.target.value);
+                                setProfileName(sanitizeName(e.target.value));
                             }}
                         />
                         <Input
@@ -84,8 +85,7 @@ const ProfileModal: FC<ProfileModalProps> = ({
                             <button
                                 className='btn'
                                 disabled={
-                                    checkValidEndpoint(profileEndpoint) === '' ||
-                                    profileName.length < 1
+                                    validEndpoint(profileEndpoint) === '' || profileName.length < 1
                                 }
                                 onClick={() => {
                                     handleAddProfile();
@@ -106,29 +106,35 @@ const ProfileModal: FC<ProfileModalProps> = ({
                     {typeof profilesInput !== 'string' && profilesInput.length > 0 && (
                         <>
                             <div className='tagList'>
-                                {profilesInput.map((item: Profile, index: number) => (
-                                    <div className='tagItem' key={Number(index)}>
-                                        <i
-                                            role='presentation'
-                                            className='material-icons closeIco'
-                                            onClick={() => {
-                                                handleRemoveProfile(index);
-                                            }}
-                                        >
-                                            &#xe5cd;
-                                        </i>
-                                        <i
-                                            role='presentation'
-                                            className='material-icons'
-                                            onClick={() => {
-                                                handleEditProfile(index);
-                                            }}
-                                        >
-                                            &#xe3c9;
-                                        </i>
-                                        <span title={item.endpoint}>{item.name}</span>
-                                    </div>
-                                ))}
+                                {profilesInput.map(
+                                    (item: Profile, index: number) =>
+                                        typeof item.endpoint === 'string' &&
+                                        item.endpoint.length > 7 && (
+                                            <>
+                                                <div className='tagItem' key={index}>
+                                                    <i
+                                                        role='presentation'
+                                                        className='material-icons closeIco'
+                                                        onClick={() => {
+                                                            handleRemoveProfile(index);
+                                                        }}
+                                                    >
+                                                        &#xe5cd;
+                                                    </i>
+                                                    <i
+                                                        role='presentation'
+                                                        className='material-icons'
+                                                        onClick={() => {
+                                                            handleEditProfile(index);
+                                                        }}
+                                                    >
+                                                        &#xe3c9;
+                                                    </i>
+                                                    <span title={item.endpoint}>{item.name}</span>
+                                                </div>
+                                            </>
+                                        )
+                                )}
                             </div>
                         </>
                     )}
@@ -151,20 +157,22 @@ const ProfileModal: FC<ProfileModalProps> = ({
                     >
                         {appLang?.modal?.update}
                     </div>
-                    <i
-                        role='presentation'
+                    <div
+                        role='button'
                         className={classNames(
-                            'material-icons',
-                            'updater',
+                            'btn',
+                            'btn-update',
                             defaultSettings.endpoint === endpoint ? 'hidden' : ''
                         )}
-                        title={appLang?.modal?.endpoint_paste}
                         onClick={() => {
                             setProfileEndpoint(endpoint);
                         }}
+                        tabIndex={0}
                     >
-                        &#xea8e;
-                    </i>
+                        <i className={'material-icons'} title={appLang?.modal?.endpoint_paste}>
+                            &#xea8e;
+                        </i>
+                    </div>
                 </div>
             </div>
         </div>
